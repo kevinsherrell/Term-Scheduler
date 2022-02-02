@@ -27,17 +27,22 @@ import java.lang.ref.Reference;
 //
 //)
 @Entity(tableName = "course_table",
-foreignKeys = {
-        @ForeignKey(
-                entity = Instructor.class,
-                parentColumns = "instructor_id",
-                childColumns = "instructor_id"
-        ),
-        @ForeignKey(
-                entity = Assessment.class,
-                parentColumns = "assessment_id",
-                childColumns = "assessment_id"
-        )
+        foreignKeys = {
+                @ForeignKey(
+                        entity = Instructor.class,
+                        parentColumns = "instructor_id",
+                        childColumns = "instructor_id"
+                ),
+                @ForeignKey(
+                        entity = Assessment.class,
+                        parentColumns = "assessment_id",
+                        childColumns = "assessment_id"
+                ),
+                @ForeignKey(
+                        entity = Note.class,
+                        parentColumns = "note_id",
+                        childColumns = "note_id"
+                )
         })
 public class Course {
     @PrimaryKey(autoGenerate = true)
@@ -52,6 +57,9 @@ public class Course {
     @NonNull
     @ColumnInfo(name = "assessment_id")
     private int assessmentId;
+
+    @ColumnInfo(name = "note_id")
+    private int noteId;
 
     @NonNull
     @ColumnInfo(name = "title")
@@ -75,6 +83,22 @@ public class Course {
 
     public void setInstructorId(int instructorId) {
         this.instructorId = instructorId;
+    }
+
+    public int getAssessmentId() {
+        return assessmentId;
+    }
+
+    public void setAssessmentId(int assessmentId) {
+        this.assessmentId = assessmentId;
+    }
+
+    public int getNoteId() {
+        return noteId;
+    }
+
+    public void setNoteId(int noteId) {
+        this.noteId = noteId;
     }
 
     @NonNull
