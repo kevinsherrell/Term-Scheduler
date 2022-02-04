@@ -1,6 +1,7 @@
-package com.c196.TermScheduler.UI;
+package com.c196.TermScheduler.UI.Term;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.c196.TermScheduler.Data.SchedulerRepository;
 import com.c196.TermScheduler.Model.TermViewModel;
 import com.c196.TermScheduler.R;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 public class TermList extends AppCompatActivity {
     private String TAG = "MainActivity";
@@ -36,6 +38,9 @@ public class TermList extends AppCompatActivity {
             adapter = new TermAdapter((terms));
             recyclerView.setAdapter(adapter);
         });
+
+        ExtendedFloatingActionButton fab = findViewById(R.id.fab);
+        Log.i(TAG, "onCreate: " + fab);
 
     }
 

@@ -81,4 +81,7 @@ public class Term {
                 ", end=" + end +
                 '}';
     }
+    public String idToString(){
+        return Integer.toString(id);
+    }
 }
