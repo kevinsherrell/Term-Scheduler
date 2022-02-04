@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/termCourseItem"
+    style="@style/list_layout_style"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/termCourseIdTextView"
+        style="@style/list_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light" />
+
+    <TextView
+        android:id="@+id/termCourseTitleTextView"
+        style="@style/list_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light" />
+
+    <TextView
+        android:id="@+id/termCourseStartTextView"
+        style="@style/list_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light" />
+
+    <TextView
+        android:id="@+id/termCourseEndTextView"
+        style="@style/list_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light" />
+
+    <TextView
+        android:id="@+id/termCourseInstructorTextView"
+        style="@style/list_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light" />
+    <TextView
+        android:id="@+id/termCourseNoteTextView"
+        style="@style/list_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light" />
+    <TextView
+        android:id="@+id/termCourseStatusTextView"
+        style="@style/list_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light" />
+    <Button
+        android:id="@+id/termCourseDetailButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Course Detail">Term Detail
+    </Button>
+</LinearLayout>
