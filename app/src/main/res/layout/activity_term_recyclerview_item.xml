@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/termItem"
+    style="@style/list_layout_style"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/idTextView"
+        style="@style/list_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light" />
+
+    <TextView
+        android:id="@+id/titleTextView"
+        style="@style/list_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light" />
+
+    <TextView
+        android:id="@+id/startTextView"
+        style="@style/list_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light" />
+
+    <TextView
+        android:id="@+id/endTextView"
+        style="@style/list_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light" />
+
+    <Button
+        android:id="@+id/termDetailButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Term Detail">Term Detail
+    </Button>
+</LinearLayout>
