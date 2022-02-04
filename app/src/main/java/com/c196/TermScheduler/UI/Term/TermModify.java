@@ -1,4 +1,4 @@
-package com.c196.TermScheduler.UI;
+package com.c196.TermScheduler.UI.Term;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.c196.TermScheduler.R;
 
-public class TermAdd extends AppCompatActivity {
+public class TermModify extends AppCompatActivity {
     private static String TAG = "TermViewActivity";
     private int termID;
 

@@ -1,4 +1,4 @@
-package com.c196.TermScheduler.UI;
+package com.c196.TermScheduler.UI.Term;
 
 import android.content.Context;
 import android.content.Intent;
@@ -78,10 +78,10 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
                     final Term current = termList.get(position);
                     Log.d(TAG, "onClick: " + itemView.getContext().toString());
                     Intent intent = new Intent(viewContext, TermDetail.class);
-                    intent.putExtra("id", current.getId());
+                    intent.putExtra("id", String.valueOf(current.getId()));
                     intent.putExtra("title", current.getTitle());
-                    intent.putExtra("start", current.getStart());
-                    intent.putExtra("end", current.getEnd());
+                    intent.putExtra("start", String.valueOf(current.getStart()));
+                    intent.putExtra("end", String.valueOf(current.getEnd()));
                     viewContext.startActivity(intent);
                 }
 
