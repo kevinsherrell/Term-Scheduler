@@ -8,7 +8,9 @@ import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
-@Entity(tableName = "assessment_table", foreignKeys = @ForeignKey(entity = Course.class, parentColumns = "course_id", childColumns = "course_id"))
+@Entity(tableName = "assessment_table"
+        , foreignKeys = {@ForeignKey(entity = Course.class, parentColumns = "course_id", childColumns = "course_id")}
+)
 public class Assessment {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "assessment_id")
@@ -38,6 +40,7 @@ public class Assessment {
         this.title = title;
         this.description = description;
         this.date = date;
+        this.courseId = courseId;
     }
 
     public int getId() {

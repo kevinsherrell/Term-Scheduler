@@ -9,6 +9,8 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.c196.TermScheduler.Model.Assessment;
+import com.c196.TermScheduler.Model.AssessmentWithCourse;
+import com.c196.TermScheduler.Model.CourseWithTerm;
 import com.c196.TermScheduler.Model.Term;
 
 import java.util.List;
@@ -17,8 +19,8 @@ import java.util.List;
 public interface AssessmentDAO {
 
     // insert course
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Assessment assesment);
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insert(Assessment assessment);
 
     // update course
     @Update
@@ -36,9 +38,14 @@ public interface AssessmentDAO {
     @Query("SELECT * FROM assessment_table")
     LiveData<List<Assessment>> getAllAssessments();
 
-    // get all assessments belonging to course
+    // get all assessment belonging to course
     @Query("SELECT * FROM assessment_table WHERE assessment_table.course_id == :id")
-    LiveData<List<Assessment>> getAssessmentsByFK(int id);
+    List<Assessment> getAssessmentsByFK(int id);
+
+    // get assessments with associated term information
+    @Query("SELECT * FROM assessment_table WHERE course_id = :id")
+    LiveData<List<AssessmentWithCourse>> getAssessmentsWithTerm(int id);
+
 
     @Query("SELECT * FROM assessment_table WHERE assessment_table.assessment_id == :id")
     LiveData<Assessment> getAssessmentById(int id);

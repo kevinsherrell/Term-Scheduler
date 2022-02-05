@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/courseAssessmentItem"
+    style="@style/list_layout_style"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/courseAssesmentIdTextView"
+        style="@style/list_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light" />
+
+    <TextView
+        android:id="@+id/courseAssesmentTitleTextView"
+        style="@style/list_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light" />
+
+    <TextView
+        android:id="@+id/courseAssesmentDateTextView"
+        style="@style/list_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light" />
+
+    <TextView
+        android:id="@+id/courseAssessmentTypeTextView"
+        style="@style/list_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light" />
+
+    <TextView
+        android:id="@+id/courseAssessmentDescriptionTextView"
+        style="@style/list_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light" />
+
+    <Button
+        android:id="@+id/courseAssessmentDetailButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Assesment Detail">Term Detail</Button>
+
+    <Button
+        android:id="@+id/assessmentModifyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Modify Assesment">Term Detail</Button>
+
+    <Button
+        android:id="@+id/assessmentDeleteButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Assessment">Term Detail
+    </Button>
+</LinearLayout>
