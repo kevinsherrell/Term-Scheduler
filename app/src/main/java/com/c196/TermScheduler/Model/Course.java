@@ -31,7 +31,7 @@ public class Course {
     private String instructor;
 
 
-    @ColumnInfo(name = "note")
+    @ColumnInfo(name = "note", defaultValue = "none")
     private String note;
 
     @NonNull
