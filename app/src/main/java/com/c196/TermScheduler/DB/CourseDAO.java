@@ -49,5 +49,8 @@ public interface CourseDAO {
     @Query("SELECT * FROM course_table WHERE course_table.course_id == :id")
     LiveData<Course> getCourseById(int id);
 
+    @Query("SELECT * FROM course_table WHERE term_id = :id")
+    Course getOneCourseByFK(int id);
+
 
 }

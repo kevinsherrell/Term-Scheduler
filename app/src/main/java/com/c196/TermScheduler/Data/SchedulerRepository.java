@@ -48,11 +48,16 @@ public class SchedulerRepository {
     public LiveData<List<CourseWithTerm>> getCoursesWithTerm(int id) {
         return courseDAO.getCoursesWithTerm( id);
     }
-
+ public Course getOneCourseByFK(int id){
+        return courseDAO.getOneCourseByFK(id);
+ }
     public LiveData<Course> getCourseById(int id) {
         return courseDAO.getCourseById(id);
     }
 
+    public LiveData<List<Course>> getCoursesByFK(int id){
+        return courseDAO.getCoursesByFK(id);
+    }
     public void insertCourse(Course course) {
         SchedulerDB.databaseWriteExecutor.execute(() -> {
             courseDAO.insert(course);
