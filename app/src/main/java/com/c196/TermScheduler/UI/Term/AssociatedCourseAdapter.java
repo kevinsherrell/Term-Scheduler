@@ -42,7 +42,7 @@ public class AssociatedCourseAdapter extends RecyclerView.Adapter<AssociatedCour
         holder.titleTextView.setText(current.course.getTitle());
         holder.startTextView.setText(current.term.getStart().toString());
         holder.endTextView.setText(current.term.getEnd().toString());
-        holder.instructorTextView.setText(current.course.getId());
+        holder.instructorTextView.setText(String.valueOf(current.course.getId()));
         holder.noteTextView.setText(current.course.getNote());
         holder.statusTextView.setText(current.course.getStatus());
     }

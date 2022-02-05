@@ -54,34 +54,10 @@ public class CourseAdd extends AppCompatActivity {
 
         submitButton.setOnClickListener(view -> {
             Log.d("ONCLICK COURSE ADD", "onCreate: ");
-//            Intent replyIntent = new Intent();
-//
-//                if (TextUtils.isEmpty(titleInput.getText())) {
-//                    setResult(RESULT_CANCELED, replyIntent);
-//                } else {
-//                    String instructor = instructorBox.getSelectedItem().toString();
-//                    String status = statusBox.getSelectedItem().toString();
-//                    String title = titleInput.getText().toString();
-//                    String note;
-//                    //term id
-//
-//                    if (noteInput.getText() == null || TextUtils.isEmpty(noteInput.getText())) {
-//                        note = "none";
-//                        replyIntent.putExtra("replyNote", note);
-//                    } else {
-//                        note = noteInput.getText().toString();
-//                        replyIntent.putExtra("replyNote", note);
-//                    }
-////                    Course course = new Course(instructor, note, title, status, id);
-////                    replyIntent.putExtra("courseFromAdd", (Parcelable) course);
-//                    replyIntent.putExtra("replyInstructor", instructor);
-//                    replyIntent.putExtra("replyStatus", status);
-//                    replyIntent.putExtra("replyTitle", title);
-//                    replyIntent.putExtra("replyTermId", termId);
-//                    setResult(RESULT_OK, replyIntent);
-//                }
-            createCourse();
 
+            createCourse();
+            backToTermDetail();
+            Toast.makeText(getApplicationContext(), "Course Saved Successfully", Toast.LENGTH_LONG).show();
         });
     }
 
@@ -125,5 +101,8 @@ public class CourseAdd extends AppCompatActivity {
 
     }
 
-
+    public void backToTermDetail() {
+        Intent intent = new Intent(CourseAdd.this, TermList.class);
+        startActivity(intent);
+    }
 }

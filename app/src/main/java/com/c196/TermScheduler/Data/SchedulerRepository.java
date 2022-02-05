@@ -10,6 +10,7 @@ import com.c196.TermScheduler.DB.SchedulerDB;
 import com.c196.TermScheduler.DB.TermDAO;
 import com.c196.TermScheduler.Model.Assessment;
 import com.c196.TermScheduler.Model.Course;
+import com.c196.TermScheduler.Model.CourseWithTerm;
 import com.c196.TermScheduler.Model.Term;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class SchedulerRepository {
     private LiveData<List<Course>> allCourses;
     private LiveData<List<Term>> allTerms;
     private LiveData<List<Assessment>> allAssessments;
+    private LiveData<List<CourseWithTerm>> allCoursesWithTerm;
 
     public SchedulerRepository(Application application) {
         SchedulerDB db = SchedulerDB.getDatabase(application);
@@ -34,6 +36,7 @@ public class SchedulerRepository {
         allTerms = termDAO.getAllTerms();
         allAssessments = assessmentDAO.getAllAssessments();
         allCourses = courseDAO.getAllCourses();
+        allCoursesWithTerm = getCoursesWithTerm();
     }
 
 
@@ -42,7 +45,13 @@ public class SchedulerRepository {
         return allCourses;
     }
 
-    public LiveData<Course> getCourseById(int id){return courseDAO.getCourseById(id);}
+    public LiveData<List<CourseWithTerm>> getCoursesWithTerm() {
+        return courseDAO.getCoursesWithTerm();
+    }
+
+    public LiveData<Course> getCourseById(int id) {
+        return courseDAO.getCourseById(id);
+    }
 
     public void insertCourse(Course course) {
         SchedulerDB.databaseWriteExecutor.execute(() -> {
@@ -70,7 +79,9 @@ public class SchedulerRepository {
         return allTerms;
     }
 
-    public LiveData<Term> getTermById(int id){return termDAO.getTermById(id);}
+    public LiveData<Term> getTermById(int id) {
+        return termDAO.getTermById(id);
+    }
 
     public void insertTerm(Term term) {
         SchedulerDB.databaseWriteExecutor.execute(() -> {
@@ -105,7 +116,10 @@ public class SchedulerRepository {
         return allAssessments;
     }
 
-    public LiveData<Assessment> getAssessmentById(int id){return assessmentDAO.getAssessmentById(id);}
+    public LiveData<Assessment> getAssessmentById(int id) {
+        return assessmentDAO.getAssessmentById(id);
+    }
+
     public void insertAssessment(Assessment assessment) {
         SchedulerDB.databaseWriteExecutor.execute(() -> {
             assessmentDAO.insert(assessment);
@@ -128,15 +142,12 @@ public class SchedulerRepository {
     }
 
 
-
     public void setAllCourses() {
         SchedulerDB.databaseWriteExecutor.execute(() -> {
             allCourses = courseDAO.getAllCourses();
         });
 
     }
-
-
 
 
 //    public void selectAllTerms() {
@@ -154,7 +165,6 @@ public class SchedulerRepository {
     //    public void getAllTerms(){
 //
 //    }
-
 
 
 }

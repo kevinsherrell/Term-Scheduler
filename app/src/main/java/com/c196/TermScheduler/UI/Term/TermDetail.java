@@ -2,6 +2,8 @@ package com.c196.TermScheduler.UI.Term;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +19,8 @@ import com.c196.TermScheduler.R;
 
 public class TermDetail extends AppCompatActivity {
     public CourseViewModel model;
-
+    private RecyclerView recyclerView;
+    private AssociatedCourseAdapter adapter;
     private static String TAG = "TermDetailActivity";
     private String id;
     private String title;
@@ -30,6 +33,18 @@ public class TermDetail extends AppCompatActivity {
         setContentView(R.layout.activity_term_detail);
         getIncomingIntent();
 
+        recyclerView = findViewById(R.id.termDetailRecycler);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        model = new ViewModelProvider.AndroidViewModelFactory(TermDetail.this.getApplication()).create(CourseViewModel.class);
+
+        model.getCoursesWithTerm().observe(this, courses -> {
+            adapter = new AssociatedCourseAdapter((courses));
+            recyclerView.setAdapter(adapter);
+        });
+//        adapter = new AssociatedCourseAdapter(())
+//        recyclerView.setAdapter();
+
         Button addCourse = findViewById(R.id.addCourse);
         addCourse.setOnClickListener(view -> {
             Intent intent = new Intent(TermDetail.this, CourseAdd.class);
@@ -39,7 +54,6 @@ public class TermDetail extends AppCompatActivity {
             intent.putExtra("end", end);
             startActivity(intent);
 
-            // look into startactivityforresult -----
         });
     }
 
@@ -64,24 +78,5 @@ public class TermDetail extends AppCompatActivity {
         }
     }
 
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == COURSE_ADD_REQUEST_CODE && resultCode == RESULT_OK) {
-//
-//            String instructor = data.getStringExtra("replyInstructor");
-//            String note = data.getStringExtra("replyNote");
-//            String title = data.getStringExtra("replyTitle");
-//            String status = data.getStringExtra("replyStatus");
-//            int termId = Integer.parseInt(data.getStringExtra("replyTermId"));
-//            Course course = new Course(instructor, note, title, status, termId);
-//            model.insert(course);
-//        } else {
-//            Toast.makeText(
-//                    getApplicationContext(),
-//                    R.string.empty_not_saved,
-//                    Toast.LENGTH_LONG).show();
-//
-//        }
-//    }
+
 }
