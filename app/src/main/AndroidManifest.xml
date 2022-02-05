@@ -13,7 +13,7 @@
             android:name=".UI.Course.CourseDetail"
             android:exported="false" />
         <activity
-            android:name=".UI.Term.TermAdd"
+            android:name=".UI.Term.CourseAdd"
             android:exported="false" />
         <activity
             android:name=".UI.Term.TermDetail"

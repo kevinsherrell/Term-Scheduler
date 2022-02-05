@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="instructor_array">
+        <item>Julius Jones | 555-555-5555 | mrjones@email.com</item>
+        <item>Ronald McDonald | 555-566-5555 | rmac@email.com</item>
+        <item>Rando Mando | 555-577-5555 | rman@email.com</item>
+        <item>Janet Jackson | 555-588-5555 | jj@email.com</item>
+        <item>Jeniffer Lawrence | 555-599-5555 | jl@gmail.com</item>
+    </string-array>
+    <string-array name="type_array">
+        <item>OA - Objective Assessment</item>
+        <item>PA - Performance Assessment</item>
+    </string-array>
+    <string-array name="status_array">
+        <item>Not Started</item>
+        <item>In Progress</item>
+        <item>Completed</item>
+    </string-array>
+</resources>

@@ -25,12 +25,14 @@ public class TermDetail extends AppCompatActivity {
 
         Button addCourse = findViewById(R.id.addCourse);
         addCourse.setOnClickListener(view -> {
-            Intent intent = new Intent(this.getApplicationContext(), TermAdd.class);
+            Intent intent = new Intent(this.getApplicationContext(), CourseAdd.class);
             intent.putExtra("id", id);
             intent.putExtra("title", title);
             intent.putExtra("start", start);
             intent.putExtra("end", end);
             startActivity(intent);
+
+            // look into startactivityforresult -----
         });
     }
 
