@@ -3,7 +3,7 @@ package com.c196.TermScheduler.UI.Term;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.database.SQLException;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,21 +14,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.c196.TermScheduler.DB.SchedulerDB;
-import com.c196.TermScheduler.DB.TermDAO;
 import com.c196.TermScheduler.Data.SchedulerRepository;
 import com.c196.TermScheduler.Model.Course;
-import com.c196.TermScheduler.Model.CourseWithTerm;
 import com.c196.TermScheduler.Model.Term;
-import com.c196.TermScheduler.Model.TermViewModel;
 import com.c196.TermScheduler.R;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
     private String TAG = "TermAdapter";
@@ -107,17 +103,24 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
                     int position = getAdapterPosition();
                     final Term current = termList.get(position);
                     SchedulerRepository repository = new SchedulerRepository((Application) viewContext.getApplicationContext());
-                    Course associated = repository.getOneCourseByFK(current.getId());
-                    Log.d(TAG, "onClick: " + associated.getId());
-//                        repository.deleteTerm(current);
+                    SchedulerDB.databaseWriteExecutor.execute(() -> {
+                        List<Course> associatedCourses = repository.getCoursesByFK(current.getId());
+                        if (associatedCourses.size() < 1 || associatedCourses == null) {
+                            repository.deleteTerm(current);
+                        } else {
+                            Log.d(TAG, "onClick: cannot delete");
 
-//                    if (repository.getOneCourseByFK(current.getId()) == null) {
-//                        Toast.makeText(viewContext.getApplicationContext(), "Course Saved Successfully", Toast.LENGTH_LONG).show();
-//                    } else {
-//
-//                    }
+                            Looper.prepare();
+                            TermList.showToast(viewContext, "Error: This term has associated courses. Delete them first");
+                        }
+                    });
+
+                    Log.d(TAG, "onClick: " + courseCount);
+
+
                 }
             }));
         }
     }
+
 }

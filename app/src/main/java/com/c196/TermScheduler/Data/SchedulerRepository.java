@@ -55,7 +55,7 @@ public class SchedulerRepository {
         return courseDAO.getCourseById(id);
     }
 
-    public LiveData<List<Course>> getCoursesByFK(int id){
+    public List<Course> getCoursesByFK(int id){
         return courseDAO.getCoursesByFK(id);
     }
     public void insertCourse(Course course) {
