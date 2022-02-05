@@ -42,8 +42,7 @@ public class TermDetail extends AppCompatActivity {
             adapter = new AssociatedCourseAdapter((courses));
             recyclerView.setAdapter(adapter);
         });
-//        adapter = new AssociatedCourseAdapter(())
-//        recyclerView.setAdapter();
+
 
         Button addCourse = findViewById(R.id.addCourse);
         addCourse.setOnClickListener(view -> {
