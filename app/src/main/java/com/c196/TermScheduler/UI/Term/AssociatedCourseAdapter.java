@@ -2,6 +2,7 @@ package com.c196.TermScheduler.UI.Term;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,16 +76,21 @@ public class AssociatedCourseAdapter extends RecyclerView.Adapter<AssociatedCour
             instructorTextView = itemView.findViewById(R.id.termCourseInstructorTextView);
             noteTextView = itemView.findViewById(R.id.termCourseNoteTextView);
             statusTextView = itemView.findViewById(R.id.termCourseStatusTextView);
-
             parentLayout = itemView.findViewById(R.id.termCourseItem);
 
             courseDetailButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Log.d(TAG, "onClick: ");
                     int position = getAdapterPosition();
                     final CourseWithTerm current = courseList.get(position);
                     Intent intent = new Intent(viewContext, CourseDetail.class);
-                    intent.putExtra("course", current);
+                    intent.putExtra("id", String.valueOf(current.course.getId()));
+                    intent.putExtra("title", current.course.getTitle());
+                    intent.putExtra("start", current.term.getStart().toString());
+                    intent.putExtra("end", current.term.getEnd().toString());
+                    intent.putExtra("note", current.course.getNote());
+                    viewContext.startActivity(intent);
                 }
             });
 

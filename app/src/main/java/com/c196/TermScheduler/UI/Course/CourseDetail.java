@@ -1,16 +1,83 @@
 package com.c196.TermScheduler.UI.Course;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.c196.TermScheduler.Model.AssessmentViewModel;
+import com.c196.TermScheduler.Model.CourseViewModel;
 import com.c196.TermScheduler.R;
+import com.c196.TermScheduler.UI.Assessment.AssessmentAdd;
+import com.c196.TermScheduler.UI.Term.AssociatedCourseAdapter;
+import com.c196.TermScheduler.UI.Term.CourseAdd;
+import com.c196.TermScheduler.UI.Term.TermDetail;
 
 public class CourseDetail extends AppCompatActivity {
+    public AssessmentViewModel model;
+    private RecyclerView recyclerView;
+    private AssociatedAssessmentAdapter adapter;
+    private static String TAG = "CourseDetailActivity";
+    private String id;
+    private String title;
+    private String start;
+    private String end;
+    private String note;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_detail);
+        getIncomingIntent();
+        recyclerView = findViewById(R.id.courseDetailRecycler);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        model = new ViewModelProvider.AndroidViewModelFactory(CourseDetail.this.getApplication()).create(AssessmentViewModel.class);
+
+        model.getAssessmentsWithCourse(Integer.parseInt(id)).observe(this, Assessments -> {
+            adapter = new AssociatedAssessmentAdapter((Assessments));
+            recyclerView.setAdapter(adapter);
+        });
+
+        Button addAssessment = findViewById(R.id.addAssessment);
+        addAssessment.setOnClickListener(view -> {
+            Intent intent = new Intent(CourseDetail.this, AssessmentAdd.class);
+            intent.putExtra("id", id);
+            intent.putExtra("title", title);
+            intent.putExtra("start", start);
+            intent.putExtra("end", end);
+            startActivity(intent);
+
+        });
+    }
+
+    private void getIncomingIntent() {
+        Log.d(TAG, "getIncomingIntent");
+        if (getIntent().hasExtra("id")) {
+            Log.d(TAG, "getIncomingIntent: has ID " + getIntent().getStringExtra("id"));
+            TextView idView = findViewById(R.id.cDetailID);
+            TextView startView = findViewById(R.id.courseDetailStart);
+            TextView titleView = findViewById(R.id.courseDetailTitle);
+            TextView endView = findViewById(R.id.courseDetailEnd);
+            TextView noteView = findViewById(R.id.courseNoteDetail);
+
+            id = getIntent().getStringExtra("id");
+            title = getIntent().getStringExtra("title");
+            start = getIntent().getStringExtra("start");
+            end = getIntent().getStringExtra("end");
+            note = getIntent().getStringExtra("note");
+            idView.setText(id);
+            titleView.setText(title);
+            startView.setText(start);
+            endView.setText(end);
+            noteView.setText(note);
+
+        }
     }
 }

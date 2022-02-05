@@ -5,8 +5,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -68,11 +66,11 @@ public class CourseAdd extends AppCompatActivity {
             termStart = getIntent().getStringExtra("start");
             termEnd = getIntent().getStringExtra("end");
 
-            titleInput = findViewById(R.id.titleInput);
-            noteInput = findViewById(R.id.noteInput);
-            statusBox = findViewById(R.id.statusBox);
+            titleInput = findViewById(R.id.AssessmentTitleInput);
+            noteInput = findViewById(R.id.assessmentDescriptionInput);
+            statusBox = findViewById(R.id.typeBox);
             instructorBox = findViewById(R.id.instructorBox);
-            submitButton = findViewById(R.id.submitButton);
+            submitButton = findViewById(R.id.assessmentSubmit);
             startDate = findViewById(R.id.startDate);
             endDate = findViewById(R.id.endDate);
 

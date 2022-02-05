@@ -9,6 +9,7 @@ import com.c196.TermScheduler.DB.CourseDAO;
 import com.c196.TermScheduler.DB.SchedulerDB;
 import com.c196.TermScheduler.DB.TermDAO;
 import com.c196.TermScheduler.Model.Assessment;
+import com.c196.TermScheduler.Model.AssessmentWithCourse;
 import com.c196.TermScheduler.Model.Course;
 import com.c196.TermScheduler.Model.CourseWithTerm;
 import com.c196.TermScheduler.Model.Term;
@@ -47,6 +48,9 @@ public class SchedulerRepository {
 
     public LiveData<List<CourseWithTerm>> getCoursesWithTerm(int id) {
         return courseDAO.getCoursesWithTerm( id);
+    }
+    public LiveData<List<AssessmentWithCourse>> getAssessmentsWithTerm(int id){
+        return assessmentDAO.getAssessmentsWithTerm(id);
     }
  public Course getOneCourseByFK(int id){
         return courseDAO.getOneCourseByFK(id);
