@@ -1,5 +1,6 @@
 package com.c196.TermScheduler.UI.Term;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -15,7 +16,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 
 public class TermList extends AppCompatActivity {
     private String TAG = "MainActivity";
-
+    private ExtendedFloatingActionButton addTermButton;
     private TermViewModel termViewModel;
     private SchedulerRepository repository;
     private RecyclerView recyclerView;
@@ -40,7 +41,11 @@ public class TermList extends AppCompatActivity {
         });
 
         ExtendedFloatingActionButton fab = findViewById(R.id.fab);
-        Log.i(TAG, "onCreate: " + fab);
+        fab.setOnClickListener(view -> {
+            Log.i(TAG, "onCreate: " + fab);
+            Intent intent = new Intent(TermList.this, TermAdd.class);
+            startActivity(intent);
+        });
 
     }
 
