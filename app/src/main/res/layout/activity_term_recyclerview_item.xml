@@ -40,4 +40,17 @@
         android:layout_height="wrap_content"
         android:text="Term Detail">Term Detail
     </Button>
+
+    <Button
+        android:id="@+id/termModifyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Modify Term">Term Detail</Button>
+
+    <Button
+        android:id="@+id/termDeleteButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Term">Term Detail
+    </Button>
 </LinearLayout>

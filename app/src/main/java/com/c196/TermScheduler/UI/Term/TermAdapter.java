@@ -1,7 +1,9 @@
 package com.c196.TermScheduler.UI.Term;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,14 +11,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.c196.TermScheduler.DB.SchedulerDB;
+import com.c196.TermScheduler.Data.SchedulerRepository;
+import com.c196.TermScheduler.Model.Course;
 import com.c196.TermScheduler.Model.Term;
 import com.c196.TermScheduler.R;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
     private String TAG = "TermAdapter";
@@ -51,6 +59,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public Button termDetailButton;
+        public Button termDeleteButton;
         public TextView id;
         public TextView title;
         public TextView start;
@@ -63,6 +72,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
             super(itemView);
             Context viewContext = itemView.getContext();
             termDetailButton = itemView.findViewById(R.id.termDetailButton);
+            termDeleteButton = itemView.findViewById(R.id.termDeleteButton);
             id = itemView.findViewById(R.id.idTextView);
             title = itemView.findViewById(R.id.titleTextView);
             start = itemView.findViewById(R.id.startTextView);
@@ -86,7 +96,31 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
                 }
 
             });
+            termDeleteButton.setOnClickListener((new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int courseCount = 0;
+                    int position = getAdapterPosition();
+                    final Term current = termList.get(position);
+                    SchedulerRepository repository = new SchedulerRepository((Application) viewContext.getApplicationContext());
+                    SchedulerDB.databaseWriteExecutor.execute(() -> {
+                        List<Course> associatedCourses = repository.getCoursesByFK(current.getId());
+                        if (associatedCourses.size() < 1 || associatedCourses == null) {
+                            repository.deleteTerm(current);
+                        } else {
+                            Log.d(TAG, "onClick: cannot delete");
 
+                            Looper.prepare();
+                            TermList.showToast(viewContext, "Error: This term has associated courses. Delete them first");
+                        }
+                    });
+
+                    Log.d(TAG, "onClick: " + courseCount);
+
+
+                }
+            }));
         }
     }
+
 }

@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TermScheduler">
         <activity
+            android:name=".UI.Term.TermAdd"
+            android:exported="false" />
+        <activity
             android:name=".UI.Course.CourseDetail"
             android:exported="false" />
         <activity
