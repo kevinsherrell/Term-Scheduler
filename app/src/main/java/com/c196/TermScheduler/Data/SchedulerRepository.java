@@ -36,7 +36,7 @@ public class SchedulerRepository {
         allTerms = termDAO.getAllTerms();
         allAssessments = assessmentDAO.getAllAssessments();
         allCourses = courseDAO.getAllCourses();
-        allCoursesWithTerm = getCoursesWithTerm();
+//        allCoursesWithTerm = getCoursesWithTerm();
     }
 
 
@@ -45,8 +45,8 @@ public class SchedulerRepository {
         return allCourses;
     }
 
-    public LiveData<List<CourseWithTerm>> getCoursesWithTerm() {
-        return courseDAO.getCoursesWithTerm();
+    public LiveData<List<CourseWithTerm>> getCoursesWithTerm(int id) {
+        return courseDAO.getCoursesWithTerm( id);
     }
 
     public LiveData<Course> getCourseById(int id) {

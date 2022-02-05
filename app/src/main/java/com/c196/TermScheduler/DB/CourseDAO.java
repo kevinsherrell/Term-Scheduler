@@ -42,8 +42,8 @@ public interface CourseDAO {
     LiveData<List<Course>> getCoursesByFK(int id);
 
     // get courses with associated term information
-    @Query("SELECT * FROM course_table")
-    LiveData<List<CourseWithTerm>> getCoursesWithTerm();
+    @Query("SELECT * FROM course_table WHERE term_id = :id")
+    LiveData<List<CourseWithTerm>> getCoursesWithTerm(int id);
 
     // get course by id
     @Query("SELECT * FROM course_table WHERE course_table.course_id == :id")

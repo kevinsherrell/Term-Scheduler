@@ -38,7 +38,7 @@ public class TermDetail extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         model = new ViewModelProvider.AndroidViewModelFactory(TermDetail.this.getApplication()).create(CourseViewModel.class);
 
-        model.getCoursesWithTerm().observe(this, courses -> {
+        model.getCoursesWithTerm(Integer.parseInt(id)).observe(this, courses -> {
             adapter = new AssociatedCourseAdapter((courses));
             recyclerView.setAdapter(adapter);
         });

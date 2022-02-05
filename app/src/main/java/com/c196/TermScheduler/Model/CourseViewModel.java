@@ -13,18 +13,18 @@ import java.util.List;
 public class CourseViewModel extends AndroidViewModel {
     public static SchedulerRepository repository;
     public final LiveData<List<Course>> allCourses;
-    public final LiveData<List<CourseWithTerm>> coursesWithTerm;
+//    public final LiveData<List<CourseWithTerm>> coursesWithTerm;
 
     public CourseViewModel(@NonNull Application application) {
         super(application);
         repository = new SchedulerRepository(application);
         allCourses = repository.getAllCourses();
-        coursesWithTerm = getCoursesWithTerm();
+//        coursesWithTerm = getCoursesWithTerm();
     }
 
 
-    public LiveData<List<CourseWithTerm>> getCoursesWithTerm() {
-        return repository.getCoursesWithTerm();
+    public LiveData<List<CourseWithTerm>> getCoursesWithTerm(int id) {
+        return repository.getCoursesWithTerm( id);
     }
 
     public LiveData<List<Course>> getAllCourses() {
