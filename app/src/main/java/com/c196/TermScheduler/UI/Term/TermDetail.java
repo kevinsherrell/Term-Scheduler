@@ -1,16 +1,23 @@
 package com.c196.TermScheduler.UI.Term;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.c196.TermScheduler.Data.SchedulerRepository;
+import com.c196.TermScheduler.Model.Course;
+import com.c196.TermScheduler.Model.CourseViewModel;
 import com.c196.TermScheduler.R;
 
 public class TermDetail extends AppCompatActivity {
+    public CourseViewModel model;
+
     private static String TAG = "TermDetailActivity";
     private String id;
     private String title;
@@ -25,7 +32,7 @@ public class TermDetail extends AppCompatActivity {
 
         Button addCourse = findViewById(R.id.addCourse);
         addCourse.setOnClickListener(view -> {
-            Intent intent = new Intent(this.getApplicationContext(), CourseAdd.class);
+            Intent intent = new Intent(TermDetail.this, CourseAdd.class);
             intent.putExtra("id", id);
             intent.putExtra("title", title);
             intent.putExtra("start", start);
@@ -57,4 +64,24 @@ public class TermDetail extends AppCompatActivity {
         }
     }
 
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == COURSE_ADD_REQUEST_CODE && resultCode == RESULT_OK) {
+//
+//            String instructor = data.getStringExtra("replyInstructor");
+//            String note = data.getStringExtra("replyNote");
+//            String title = data.getStringExtra("replyTitle");
+//            String status = data.getStringExtra("replyStatus");
+//            int termId = Integer.parseInt(data.getStringExtra("replyTermId"));
+//            Course course = new Course(instructor, note, title, status, termId);
+//            model.insert(course);
+//        } else {
+//            Toast.makeText(
+//                    getApplicationContext(),
+//                    R.string.empty_not_saved,
+//                    Toast.LENGTH_LONG).show();
+//
+//        }
+//    }
 }
