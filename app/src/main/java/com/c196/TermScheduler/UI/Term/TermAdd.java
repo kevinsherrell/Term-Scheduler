@@ -1,8 +1,10 @@
 package com.c196.TermScheduler.UI.Term;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -12,9 +14,13 @@ import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.c196.TermScheduler.Model.Term;
+import com.c196.TermScheduler.Model.TermViewModel;
 import com.c196.TermScheduler.R;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -30,7 +36,12 @@ public class TermAdd extends AppCompatActivity {
     public Button termAddStartButton, termAddSubmit;
     // id termAddDateText
     public TextView termAddDateText;
+
+    public TermViewModel model;
     private DatePickerDialog.OnDateSetListener dateSetListener;
+
+    private LocalDate lDate;
+    private Date startDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,17 +90,36 @@ public class TermAdd extends AppCompatActivity {
                 dateFromPicker = String.format("%d-%s-%s", year, monthString, dayString);
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate date = LocalDate.parse(dateFromPicker, formatter);
-                Date startDate = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                lDate = LocalDate.parse(dateFromPicker, formatter);
+                startDate = Date.from(lDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
                 termAddDateText.setText(startDate.toString());
 
                 Log.d(TAG, "onDateSet: " + startDate);
             }
         };
+
         termAddSubmit.setOnClickListener(view -> {
             Log.d(TAG, "onCreate: onClickSubmit");
+            insertTerm();
+            backToTermList();
+            Toast.makeText(getApplicationContext(), "Course Saved Successfully", Toast.LENGTH_LONG).show();
+
         });
+
     }
 
+    public void insertTerm() {
+        model = new ViewModelProvider.AndroidViewModelFactory(TermAdd.this.getApplication()).create(TermViewModel.class);
+        String title = termAddTitleInput.getText().toString();
+//        Date date = Date.from(Instant.parse(termAddDateText.toString()));
+        Date endDate = Date.from(lDate.atStartOfDay(ZoneId.systemDefault()).plusMonths(6).toInstant());
+        Term term = new Term(title, startDate, endDate);
+        model.insert(term);
+    }
+
+    public void backToTermList() {
+        Intent intent = new Intent(TermAdd.this, TermList.class);
+        startActivity(intent);
+    }
 }
