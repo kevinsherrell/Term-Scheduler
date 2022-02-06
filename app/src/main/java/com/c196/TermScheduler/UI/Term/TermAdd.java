@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.c196.TermScheduler.Model.Term;
 import com.c196.TermScheduler.Model.TermViewModel;
 import com.c196.TermScheduler.R;
+import com.google.android.material.datepicker.MaterialDatePicker;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -33,12 +34,13 @@ public class TermAdd extends AppCompatActivity {
     // id termAddTitleInput
     public EditText termAddTitleInput;
     // id termAddStartButton and termAddSubmit
-    public Button termAddStartButton, termAddSubmit;
+    public Button termAddStartButton,  termAddEndButton, termAddSubmit;
     // id termAddDateText
-    public TextView termAddDateText;
+    public TextView termAddDateText, termAddDateEnd;
 
     public TermViewModel model;
-    private DatePickerDialog.OnDateSetListener dateSetListener;
+    private DatePickerDialog.OnDateSetListener startDateSetListener;
+    private DatePickerDialog.OnDateSetListener endDateSetLis;
 
     private LocalDate lDate;
     private Date startDate;
@@ -49,9 +51,11 @@ public class TermAdd extends AppCompatActivity {
         setContentView(R.layout.activity_term_add);
 
         termAddStartButton = findViewById(R.id.termAddStartButton);
+
         termAddSubmit = findViewById(R.id.termAddSubmit);
         termAddTitleInput = findViewById(R.id.termAddTitleInput);
         termAddDateText = findViewById(R.id.termAddDateText);
+        termAddDateEnd = findViewById(R.id.termAddDateEnd);
         termAddStartButton.setOnClickListener(view -> {
             Log.d(TAG, "onCreate: onClickDate");
             Calendar cal = Calendar.getInstance();
@@ -62,14 +66,16 @@ public class TermAdd extends AppCompatActivity {
             DatePickerDialog dialog = new DatePickerDialog(
                     TermAdd.this,
                     android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                    dateSetListener,
+                    startDateSetListener,
                     year,
                     month,
                     day);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.show();
         });
-        dateSetListener = new DatePickerDialog.OnDateSetListener() {
+
+
+        startDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
@@ -92,9 +98,10 @@ public class TermAdd extends AppCompatActivity {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 lDate = LocalDate.parse(dateFromPicker, formatter);
                 startDate = Date.from(lDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                Date endDate = Date.from(lDate.atStartOfDay(ZoneId.systemDefault()).plusMonths(6).toInstant());
 
                 termAddDateText.setText(startDate.toString());
-
+                termAddDateEnd.setText(endDate.toString());
                 Log.d(TAG, "onDateSet: " + startDate);
             }
         };
@@ -121,5 +128,9 @@ public class TermAdd extends AppCompatActivity {
     public void backToTermList() {
         Intent intent = new Intent(TermAdd.this, TermList.class);
         startActivity(intent);
+    }
+
+    public void showDatePicker(){
+
     }
 }
