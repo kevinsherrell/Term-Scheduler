@@ -62,13 +62,20 @@ public class TermModify extends AppCompatActivity {
         termModifyTitleInput = findViewById(R.id.termModifyTitleInput);
 //        termModifyDateText = findViewById(R.id.termModifyDateText);
 //        termModifyDateEnd = findViewById(R.id.termModDateEnd);
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date(start));
+        int year = cal.get(cal.YEAR);
+        int month = cal.get(cal.MONTH);
+        int day = cal.get(cal.DAY_OF_MONTH);
+        formatDate(year, month, day);
         termModifyStartButton.setOnClickListener(view -> {
             Log.d(TAG, "onCreate: onClickDate");
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(new Date(start));
-            int year = cal.get(cal.YEAR);
-            int month = cal.get(cal.MONTH);
-            int day = cal.get(cal.DAY_OF_MONTH);
+//            Calendar cal = Calendar.getInstance();
+//            cal.setTime(new Date(start));
+//            int year = cal.get(cal.YEAR);
+//            int month = cal.get(cal.MONTH);
+//            int day = cal.get(cal.DAY_OF_MONTH);
             DatePickerDialog dialog = new DatePickerDialog(
                     TermModify.this,
                     android.R.style.Theme_Holo_Light_Dialog_MinWidth,
@@ -162,5 +169,33 @@ public class TermModify extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void formatDate(int year, int month, int day) {
+        month = month + 1;
+        Log.d(TAG, "onDateSet: " + year + "/" + month + "/" + day);
+        String dateFromPicker = "";
+        String monthString;
+        String dayString;
+        if (month < 10) {
+            monthString = "0" + month;
+        } else {
+            monthString = String.valueOf(month);
+        }
+        if (day < 10) {
+            dayString = "0" + day;
+        } else {
+            dayString = String.valueOf(day);
+        }
+        dateFromPicker = String.format("%d-%s-%s", year, monthString, dayString);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        lDate = LocalDate.parse(dateFromPicker, formatter);
+        startDate = Date.from(lDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date endDate = Date.from(lDate.atStartOfDay(ZoneId.systemDefault()).plusMonths(6).toInstant());
+
+        termModifyDateText.setText(startDate.toString());
+        termModifyDateEnd.setText(endDate.toString());
+//        Log.d(TAG, "onDateSet: " + date);
     }
 }

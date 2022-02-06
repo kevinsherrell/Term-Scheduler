@@ -36,9 +36,7 @@
         <activity
             android:name=".UI.Term.TermDetail"
             android:exported="false" />
-        <activity
-            android:name=".UI.Term.Test"
-            android:exported="false" />
+
         <activity
             android:name=".UI.Term.TermList"
             android:exported="true">
