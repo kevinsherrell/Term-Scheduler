@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TermScheduler">
         <activity
+            android:name=".UI.Term.TermModify"
+            android:exported="false" />
+        <activity
             android:name=".UI.Assessment.AssessmentAdd"
             android:exported="false" />
         <activity

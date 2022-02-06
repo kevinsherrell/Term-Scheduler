@@ -60,6 +60,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         public Button termDetailButton;
         public Button termDeleteButton;
+        public Button termModifyButton;
         public TextView id;
         public TextView title;
         public TextView start;
@@ -73,6 +74,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
             Context viewContext = itemView.getContext();
             termDetailButton = itemView.findViewById(R.id.termDetailButton);
             termDeleteButton = itemView.findViewById(R.id.termDeleteButton);
+            termModifyButton = itemView.findViewById(R.id.termModifyButton);
             id = itemView.findViewById(R.id.idTextView);
             title = itemView.findViewById(R.id.titleTextView);
             start = itemView.findViewById(R.id.startTextView);
@@ -80,7 +82,20 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
 
             parentLayout = itemView.findViewById(R.id.termItem);
 
-
+            termModifyButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    final Term current = termList.get(position);
+                    Log.d(TAG, "OnClick: ");
+                    Intent intent = new Intent(viewContext, TermModify.class);
+                    intent.putExtra("id", String.valueOf(current.getId()));
+                    intent.putExtra("title", current.getTitle());
+                    intent.putExtra("start", current.getStart().toString());
+                    intent.putExtra("end", current.getEnd().toString());
+                    viewContext.startActivity(intent);
+                }
+            });
             termDetailButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
