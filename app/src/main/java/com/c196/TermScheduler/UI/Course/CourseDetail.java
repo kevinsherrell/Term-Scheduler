@@ -30,13 +30,13 @@ public class CourseDetail extends AppCompatActivity {
     private RecyclerView recyclerView;
     private AssociatedAssessmentAdapter adapter;
     private static String TAG = "CourseDetailActivity";
-    private String id;
-    private String title;
-    private String start;
-    private String end;
-    private String note;
-    private String status;
-    private String instructor;
+    private static String id;
+    private static String title;
+    private static String start;
+    private static String end;
+    private static String note;
+    private static String status;
+    private static String instructor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

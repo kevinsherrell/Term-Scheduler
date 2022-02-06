@@ -125,23 +125,25 @@ public class AssociatedCourseAdapter extends RecyclerView.Adapter<AssociatedCour
                     viewContext.startActivity(intent);
                 }
             });
-            courseDeleteButton.setOnClickListener(new View.OnClickListener(){
+            courseDeleteButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     final CourseWithTerm current = courseList.get(position);
                     SchedulerRepository repository = new SchedulerRepository((Application) viewContext.getApplicationContext());
-                    SchedulerDB.databaseWriteExecutor.execute(()->{
+                    SchedulerDB.databaseWriteExecutor.execute(() -> {
                         List<Assessment> associatedAssessments = repository.getAssessmentsByFK(current.course.getId());
-                       if(associatedAssessments.size() < 1){
-                           repository.deleteCourse(current.course);
-                       }else{
-                           Log.d(TAG, "onClick: cannot delete");
+                        if (associatedAssessments.size() < 1) {
+                            repository.deleteCourse(current.course);
+                            Looper.prepare();
+                            CourseDetail.showToast(viewContext, "Course deleted successfully");
+                        } else {
+                            Log.d(TAG, "onClick: cannot delete");
 
-                           Looper.prepare();
-                           CourseDetail.showToast(viewContext, "Error: This course has associated assessments. Delete them first");
-                       }
+                            Looper.prepare();
+                            CourseDetail.showToast(viewContext, "Error: This course has associated assessments. Delete them first");
+                        }
                     });
                 }
             });
