@@ -24,6 +24,7 @@ import com.c196.TermScheduler.Model.Assessment;
 import com.c196.TermScheduler.Model.AssessmentViewModel;
 import com.c196.TermScheduler.R;
 import com.c196.TermScheduler.UI.Course.CourseDetail;
+import com.c196.TermScheduler.UI.Term.TermList;
 
 import java.sql.Array;
 import java.time.LocalDate;
@@ -143,7 +144,7 @@ public class AssessmentModify extends AppCompatActivity {
             Log.d(TAG, "onCreate: ");
 
             updateAssessment();
-            backToCourseDetail();
+            backToHome();
             Toast.makeText(getApplicationContext(), "Assessment Saved Successfully", Toast.LENGTH_LONG).show();
 
         });
@@ -201,12 +202,14 @@ public class AssessmentModify extends AppCompatActivity {
         model.update(assessment);
     }
 
-    public void backToCourseDetail() {
-        Intent intent = new Intent(AssessmentModify.this, CourseDetail.class);
+    public void backToHome() {
+        Intent intent = new Intent(AssessmentModify.this, TermList.class);
         intent.putExtra("id", courseId);
         intent.putExtra("title", courseTitle);
         intent.putExtra("start", courseStart);
+        Log.d(TAG, "backToCourseDetail: courseStart" + courseStart);
         intent.putExtra("end", courseEnd);
+        Log.d(TAG, "backToCourseDetail: courseEnd" + courseEnd);
         intent.putExtra("note", courseNote);
         startActivity(intent);
     }
