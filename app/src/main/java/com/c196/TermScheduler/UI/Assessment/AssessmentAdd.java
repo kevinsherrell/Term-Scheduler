@@ -24,7 +24,6 @@ import com.c196.TermScheduler.Model.Assessment;
 import com.c196.TermScheduler.Model.AssessmentViewModel;
 import com.c196.TermScheduler.R;
 import com.c196.TermScheduler.UI.Course.CourseDetail;
-import com.c196.TermScheduler.UI.Term.TermList;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -132,12 +131,12 @@ public class AssessmentAdd extends AppCompatActivity {
             end = getIntent().getStringExtra("end");
             note = getIntent().getStringExtra("note");
 
-            titleInput = findViewById(R.id.assessmentTitleInput);
-            typeBox = findViewById(R.id.assessmentTypeBox);
+            titleInput = findViewById(R.id.assessmentModTitleInput);
+            typeBox = findViewById(R.id.assessmentModTypeBox);
             assessmentDateView = findViewById(R.id.assessmentDateView);
-            dateButton = findViewById(R.id.assessmentDateButton);
-            descriptionInput = findViewById(R.id.assessmentDescriptionInput);
-            assessmentSubmit = findViewById(R.id.assessmentSubmit);
+            dateButton = findViewById(R.id.assessmentModDateButton);
+            descriptionInput = findViewById(R.id.assessmentModDescriptionInput);
+            assessmentSubmit = findViewById(R.id.assessmentModSubmit);
             dateText = findViewById(R.id.assessmentDateView);
         }
     }

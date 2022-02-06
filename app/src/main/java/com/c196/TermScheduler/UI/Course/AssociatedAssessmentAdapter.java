@@ -20,6 +20,7 @@ import com.c196.TermScheduler.Model.Assessment;
 import com.c196.TermScheduler.Model.AssessmentWithCourse;
 import com.c196.TermScheduler.R;
 import com.c196.TermScheduler.UI.Assessment.AssessmentDetail;
+import com.c196.TermScheduler.UI.Assessment.AssessmentModify;
 
 import java.util.List;
 
@@ -107,6 +108,29 @@ public class AssociatedAssessmentAdapter extends RecyclerView.Adapter<Associated
                     viewContext.startActivity(intent);
                 }
             });
+
+            assessmentModifyButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    final AssessmentWithCourse current = assessmentList.get(position);
+                    Intent intent = new Intent(viewContext, AssessmentModify.class);
+                    intent.putExtra("id", String.valueOf(current.assessment.getId()));
+                    intent.putExtra("type", current.assessment.getType());
+                    intent.putExtra("title", current.assessment.getTitle());
+                    intent.putExtra("description", current.assessment.getDescription());
+                    intent.putExtra("date", current.assessment.getDate().toString());
+                    intent.putExtra("courseId", String.valueOf(current.course.getId()));
+                    intent.putExtra("courseTitle", current.course.getTitle());
+                    intent.putExtra("courseId", String.valueOf(current.course.getId()));
+                    intent.putExtra("courseInstructor", current.course.getInstructor());
+                    intent.putExtra("courseNote", current.course.getNote());
+                    intent.putExtra("courseStatus", current.course.getStatus());
+                    viewContext.startActivity(intent);
+                }
+            });
+
+
             assessmentDeleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

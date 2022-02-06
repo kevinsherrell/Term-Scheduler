@@ -10,9 +10,10 @@
         android:id="@+id/assessmentDateView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="StartDate"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.738"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/assessmentModDateButton" />
 
@@ -20,9 +21,10 @@
         android:id="@+id/assessmentModDateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="Choose Date"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.76"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -30,22 +32,23 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="80dp"
         android:text="Choose a Date"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/assessmentModTypeBox" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/assessmentModTitleInput"
         android:layout_width="312dp"
         android:layout_height="48dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.038"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,8 +56,8 @@
         android:id="@+id/assessmentModTypeBox"
         android:layout_width="210dp"
         android:layout_height="48dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="400dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/assessmentModDescriptionInput"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -63,25 +66,26 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="72dp"
         android:text="Type"
         app:layout_constraintEnd_toStartOf="@+id/assessmentModTypeBox"
-        app:layout_constraintHorizontal_bias="0.942"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/assessmentModDescriptionInput"
         app:layout_constraintTop_toBottomOf="@+id/assessmentModDescriptionInput" />
 
     <EditText
         android:id="@+id/assessmentModDescriptionInput"
         android:layout_width="313dp"
         android:layout_height="48dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:minHeight="48dp"
         android:text="Description"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.038"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/assessmentModTitleInput"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -93,7 +97,8 @@
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/assessmentDateView"
-        app:layout_constraintVertical_bias="0.113" />
+        app:layout_constraintVertical_bias="0.08" />
 </androidx.constraintlayout.widget.ConstraintLayout>
