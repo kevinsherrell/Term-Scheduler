@@ -36,6 +36,7 @@ public class TermModify extends AppCompatActivity {
     public Button termModifyStartButton, termModifySubmit;
     // id termAddDateText
     public TextView termModifyDateText;
+    public TextView termModifyDateEnd;
 
     public TermViewModel model;
     private DatePickerDialog.OnDateSetListener dateSetListener;
@@ -59,7 +60,8 @@ public class TermModify extends AppCompatActivity {
         termModifyStartButton = findViewById(R.id.termModifyStartButton);
         termModifySubmit = findViewById(R.id.termModifySubmit);
         termModifyTitleInput = findViewById(R.id.termModifyTitleInput);
-        termModifyDateText = findViewById(R.id.termModifyDateText);
+//        termModifyDateText = findViewById(R.id.termModifyDateText);
+//        termModifyDateEnd = findViewById(R.id.termModDateEnd);
         termModifyStartButton.setOnClickListener(view -> {
             Log.d(TAG, "onCreate: onClickDate");
             Calendar cal = Calendar.getInstance();
@@ -100,9 +102,10 @@ public class TermModify extends AppCompatActivity {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 lDate = LocalDate.parse(dateFromPicker, formatter);
                 startDate = Date.from(lDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                Date endDate = Date.from(lDate.atStartOfDay(ZoneId.systemDefault()).plusMonths(6).toInstant());
 
                 termModifyDateText.setText(startDate.toString());
-
+                termModifyDateEnd.setText(endDate.toString());
                 Log.d(TAG, "onDateSet: " + startDate);
             }
         };
@@ -111,7 +114,7 @@ public class TermModify extends AppCompatActivity {
             Log.d(TAG, "onCreate: onClickSubmit");
             updateTerm();
             backToTermList();
-            Toast.makeText(getApplicationContext(), "Course Saved Successfully", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Term Updated Successfully", Toast.LENGTH_LONG).show();
 
         });
     }
@@ -135,6 +138,7 @@ public class TermModify extends AppCompatActivity {
     public void getIncomingIntent() {
         if (getIntent() != null) {
             termModifyDateText = findViewById(R.id.termModifyDateText);
+            termModifyDateEnd = findViewById(R.id.termModDateEnd);
             termModifyTitleInput = findViewById(R.id.termModifyTitleInput);
 
             id = getIntent().getStringExtra("id");
@@ -143,10 +147,10 @@ public class TermModify extends AppCompatActivity {
             end = getIntent().getStringExtra("end");
             termModifyTitleInput.setText(title);
             termModifyDateText.setText(start);
-
+            termModifyDateEnd.setText(end);
             int nDate = new Date(start).getYear();
 
-            Log.d(TAG, "getIncomingIntent: day" + start);
+            Log.d(TAG, "getIncomingIntent: day" + end);
         }
     }
 

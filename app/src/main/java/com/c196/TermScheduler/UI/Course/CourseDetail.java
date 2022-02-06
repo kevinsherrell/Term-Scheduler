@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.c196.TermScheduler.Model.AssessmentViewModel;
 import com.c196.TermScheduler.Model.CourseViewModel;
@@ -33,6 +35,8 @@ public class CourseDetail extends AppCompatActivity {
     private String start;
     private String end;
     private String note;
+    private String status;
+    private String instructor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,18 +87,28 @@ public class CourseDetail extends AppCompatActivity {
             TextView titleView = findViewById(R.id.courseDetailTitle);
             TextView endView = findViewById(R.id.courseDetailEnd);
             TextView noteView = findViewById(R.id.courseNoteDetail);
+            TextView courseInstructorView = findViewById(R.id.courseInstructorView);
+            TextView statusView = findViewById(R.id.statusView);
 
             id = getIntent().getStringExtra("id");
             title = getIntent().getStringExtra("title");
             start = getIntent().getStringExtra("start");
             end = getIntent().getStringExtra("end");
             note = getIntent().getStringExtra("note");
+            instructor = getIntent().getStringExtra("instructor");
+            status = getIntent().getStringExtra("status");
+
             idView.setText(id);
             titleView.setText(title);
             startView.setText(start);
             endView.setText(end);
             noteView.setText(note);
-
+            courseInstructorView.setText(instructor);
+            statusView.setText(status);
         }
+    }
+
+    public static void showToast(Context context, final String message) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 }

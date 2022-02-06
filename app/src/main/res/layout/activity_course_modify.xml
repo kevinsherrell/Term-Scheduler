@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.Term.CourseAdd">
-
+    tools:context=".UI.Term.CourseModify">
     <EditText
-        android:id="@+id/courseAddTitleInput"
+        android:id="@+id/courseModTitleInput"
         android:layout_width="312dp"
         android:layout_height="48dp"
         android:layout_marginTop="48dp"
@@ -44,7 +43,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Spinner
-        android:id="@+id/instructorBox"
+        android:id="@+id/courseModInstructorBox"
         android:layout_width="212dp"
         android:layout_height="48dp"
         android:layout_marginTop="20dp"
@@ -52,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.572"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/courseAddEndDate"
+        app:layout_constraintTop_toBottomOf="@+id/courseModEndDate"
         app:layout_constraintVertical_bias="0.12"
         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -64,7 +63,7 @@
         android:layout_marginTop="36dp"
         android:text="Start Date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/courseAddTitleInput" />
+        app:layout_constraintTop_toBottomOf="@+id/courseModTitleInput" />
 
     <TextView
         android:id="@+id/textView5"
@@ -72,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="Instructor"
-        app:layout_constraintEnd_toStartOf="@+id/instructorBox"
+        app:layout_constraintEnd_toStartOf="@+id/courseModInstructorBox"
         app:layout_constraintHorizontal_bias="0.377"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -88,7 +87,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/courseAddNoteInput"
+        android:id="@+id/courseModNoteInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -116,7 +115,7 @@
         app:layout_constraintVertical_bias="0.433" />
 
     <TextView
-        android:id="@+id/courseAddStartDate"
+        android:id="@+id/courseModStartDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
@@ -124,7 +123,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.107"
         app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/courseAddTitleInput" />
+        app:layout_constraintTop_toBottomOf="@+id/courseModTitleInput" />
 
     <TextView
         android:id="@+id/textView9"
@@ -132,29 +131,28 @@
         android:layout_height="18dp"
         android:layout_marginTop="36dp"
         android:text="End Date"
-        app:layout_constraintEnd_toStartOf="@+id/courseAddEndDate"
+        app:layout_constraintEnd_toStartOf="@+id/courseModEndDate"
         app:layout_constraintHorizontal_bias="0.392"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/courseAddStartDate" />
+        app:layout_constraintTop_toBottomOf="@+id/courseModStartDate" />
 
     <TextView
-        android:id="@+id/courseAddEndDate"
+        android:id="@+id/courseModEndDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="240dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/courseAddStartDate" />
+        app:layout_constraintTop_toBottomOf="@+id/courseModStartDate" />
 
     <Button
-        android:id="@+id/courseAddSubmit"
+        android:id="@+id/assessmentSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/courseAddNoteInput" />
-
+        app:layout_constraintTop_toBottomOf="@+id/courseModNoteInput" />
 </androidx.constraintlayout.widget.ConstraintLayout>
