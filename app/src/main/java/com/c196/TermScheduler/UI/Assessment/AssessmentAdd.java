@@ -32,6 +32,11 @@ import java.util.Date;
 public class AssessmentAdd extends AppCompatActivity {
     private static final String TAG = "AssessmentAdd";
     private String courseId;
+    private String title;
+    private String start;
+    private String end;
+    private String note;
+
     public EditText titleInput;
     public Spinner typeBox;
     public TextView assessmentDateView;
@@ -105,8 +110,8 @@ public class AssessmentAdd extends AppCompatActivity {
             Log.d(TAG, "onCreate: ");
 
             insertAssessment();
-            backToTermList();
-//            Toast.makeText(getApplicationContext(), "Assessment Saved Successfully", Toast.LENGTH_LONG).show();
+            backToCourseDetail();
+            Toast.makeText(getApplicationContext(), "Assessment Saved Successfully", Toast.LENGTH_LONG).show();
 
         });
 
@@ -116,6 +121,10 @@ public class AssessmentAdd extends AppCompatActivity {
     public void getIncomingIntent() {
         if (getIntent() != null) {
             courseId = getIntent().getStringExtra("id");
+            title = getIntent().getStringExtra("title");
+            start = getIntent().getStringExtra("start");
+            end = getIntent().getStringExtra("end");
+            note = getIntent().getStringExtra("note");
 
             titleInput = findViewById(R.id.assessmentTitleInput);
             typeBox = findViewById(R.id.assessmentTypeBox);
@@ -139,8 +148,13 @@ public class AssessmentAdd extends AppCompatActivity {
         model.insert(assessment);
     }
 
-    public void backToTermList() {
-        Intent intent = new Intent(AssessmentAdd.this, TermList.class);
+    public void backToCourseDetail() {
+        Intent intent = new Intent(AssessmentAdd.this, CourseDetail.class);
+        intent.putExtra("id", courseId);
+        intent.putExtra("title", title);
+        intent.putExtra("start", start);
+        intent.putExtra("end", end);
+        intent.putExtra("note", note);
         startActivity(intent);
     }
 }
