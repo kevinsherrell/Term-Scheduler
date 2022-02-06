@@ -10,6 +10,7 @@ import androidx.room.Update;
 
 import com.c196.TermScheduler.Model.Assessment;
 import com.c196.TermScheduler.Model.AssessmentWithCourse;
+import com.c196.TermScheduler.Model.Course;
 import com.c196.TermScheduler.Model.CourseWithTerm;
 import com.c196.TermScheduler.Model.Term;
 
@@ -49,4 +50,7 @@ public interface AssessmentDAO {
 
     @Query("SELECT * FROM assessment_table WHERE assessment_table.assessment_id == :id")
     LiveData<Assessment> getAssessmentById(int id);
+
+//    @Query("SELECT * FROM assessment_table WHERE assessment_table.course_id == :id")
+//    List<Assessment> getAssessmentsByFK(int id);
 }

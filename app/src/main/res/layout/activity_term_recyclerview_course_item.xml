@@ -58,4 +58,16 @@
         android:layout_height="wrap_content"
         android:text="Course Detail">Term Detail
     </Button>
+    <Button
+        android:id="@+id/termCourseModifyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Modify Course">Term Detail</Button>
+
+    <Button
+        android:id="@+id/termCourseDeleteButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Course">Term Detail
+    </Button>
 </LinearLayout>

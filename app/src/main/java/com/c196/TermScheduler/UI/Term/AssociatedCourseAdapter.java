@@ -1,7 +1,9 @@
 package com.c196.TermScheduler.UI.Term;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.c196.TermScheduler.DB.SchedulerDB;
+import com.c196.TermScheduler.Data.SchedulerRepository;
+import com.c196.TermScheduler.Model.Assessment;
+import com.c196.TermScheduler.Model.AssessmentWithCourse;
+import com.c196.TermScheduler.Model.Course;
 import com.c196.TermScheduler.Model.CourseWithTerm;
 import com.c196.TermScheduler.R;
 import com.c196.TermScheduler.UI.Course.CourseDetail;
@@ -62,13 +69,16 @@ public class AssociatedCourseAdapter extends RecyclerView.Adapter<AssociatedCour
                 instructorTextView,
                 noteTextView,
                 statusTextView;
-        public Button courseDetailButton;
+        public Button courseDetailButton, courseModifyButton, courseDeleteButton;
         LinearLayout parentLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             Context viewContext = itemView.getContext();
             courseDetailButton = itemView.findViewById(R.id.termCourseDetailButton);
+            courseDeleteButton = itemView.findViewById(R.id.termCourseDeleteButton);
+            courseModifyButton = itemView.findViewById(R.id.termCourseModifyButton);
+
             idTextView = itemView.findViewById(R.id.termCourseIdTextView);
             titleTextView = itemView.findViewById(R.id.termCourseTitleTextView);
             startTextView = itemView.findViewById(R.id.termCourseStartTextView);
@@ -78,6 +88,22 @@ public class AssociatedCourseAdapter extends RecyclerView.Adapter<AssociatedCour
             statusTextView = itemView.findViewById(R.id.termCourseStatusTextView);
             parentLayout = itemView.findViewById(R.id.termCourseItem);
 
+            courseModifyButton.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    final CourseWithTerm current = courseList.get(position);
+                    Log.d(TAG, "onClick: ");
+                    Intent intent = new Intent(viewContext, CourseModify.class);
+                    intent.putExtra("id", String.valueOf(current.course.getId()));
+                    intent.putExtra("title", current.course.getTitle());
+                    intent.putExtra("start", current.term.getStart());
+                    intent.putExtra("end", current.term.getEnd());
+                    intent.putExtra("note", current.course.getNote());
+                    viewContext.startActivity(intent);
+                }
+            });
             courseDetailButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -91,6 +117,26 @@ public class AssociatedCourseAdapter extends RecyclerView.Adapter<AssociatedCour
                     intent.putExtra("end", current.term.getEnd().toString());
                     intent.putExtra("note", current.course.getNote());
                     viewContext.startActivity(intent);
+                }
+            });
+            courseDeleteButton.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    final CourseWithTerm current = courseList.get(position);
+                    SchedulerRepository repository = new SchedulerRepository((Application) viewContext.getApplicationContext());
+                    SchedulerDB.databaseWriteExecutor.execute(()->{
+                        List<Assessment> associatedAssessments = repository.getAssessmentsByFK(current.course.getId());
+                       if(associatedAssessments.size() < 1){
+                           repository.deleteCourse(current.course);
+                       }else{
+                           Log.d(TAG, "onClick: cannot delete");
+
+                           Looper.prepare();
+                           CourseDetail.showToast(viewContext, "Error: This course has associated assessments. Delete them first");
+                       }
+                    });
                 }
             });
 

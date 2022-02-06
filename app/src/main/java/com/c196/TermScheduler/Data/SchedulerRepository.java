@@ -62,6 +62,9 @@ public class SchedulerRepository {
     public List<Course> getCoursesByFK(int id){
         return courseDAO.getCoursesByFK(id);
     }
+    public List<Assessment> getAssessmentsByFK(int id){
+        return assessmentDAO.getAssessmentsByFK(id);
+    }
     public void insertCourse(Course course) {
         SchedulerDB.databaseWriteExecutor.execute(() -> {
             courseDAO.insert(course);
