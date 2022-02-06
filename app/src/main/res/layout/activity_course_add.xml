@@ -7,7 +7,7 @@
     tools:context=".UI.Term.CourseAdd">
 
     <EditText
-        android:id="@+id/AssessmentTitleInput"
+        android:id="@+id/courseAddTitleInput"
         android:layout_width="312dp"
         android:layout_height="48dp"
         android:layout_marginTop="48dp"
@@ -52,7 +52,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.572"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/endDate"
+        app:layout_constraintTop_toBottomOf="@+id/courseAddEndDate"
         app:layout_constraintVertical_bias="0.12"
         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -64,7 +64,7 @@
         android:layout_marginTop="36dp"
         android:text="Start Date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AssessmentTitleInput" />
+        app:layout_constraintTop_toBottomOf="@+id/courseAddTitleInput" />
 
     <TextView
         android:id="@+id/textView5"
@@ -88,7 +88,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/assessmentDescriptionInput"
+        android:id="@+id/courseAddNoteInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -116,7 +116,7 @@
         app:layout_constraintVertical_bias="0.433" />
 
     <TextView
-        android:id="@+id/startDate"
+        android:id="@+id/courseAddStartDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
@@ -124,7 +124,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.107"
         app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/AssessmentTitleInput" />
+        app:layout_constraintTop_toBottomOf="@+id/courseAddTitleInput" />
 
     <TextView
         android:id="@+id/textView9"
@@ -132,29 +132,29 @@
         android:layout_height="18dp"
         android:layout_marginTop="36dp"
         android:text="End Date"
-        app:layout_constraintEnd_toStartOf="@+id/endDate"
+        app:layout_constraintEnd_toStartOf="@+id/courseAddEndDate"
         app:layout_constraintHorizontal_bias="0.392"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startDate" />
+        app:layout_constraintTop_toBottomOf="@+id/courseAddStartDate" />
 
     <TextView
-        android:id="@+id/endDate"
+        android:id="@+id/courseAddEndDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="240dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startDate" />
+        app:layout_constraintTop_toBottomOf="@+id/courseAddStartDate" />
 
     <Button
-        android:id="@+id/assessmentSubmit"
+        android:id="@+id/courseAddSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/assessmentDescriptionInput" />
+        app:layout_constraintTop_toBottomOf="@+id/courseAddNoteInput" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

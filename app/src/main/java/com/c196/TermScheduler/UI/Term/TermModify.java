@@ -111,7 +111,7 @@ public class TermModify extends AppCompatActivity {
             Log.d(TAG, "onCreate: onClickSubmit");
             updateTerm();
             backToTermList();
-            Toast.makeText(getApplicationContext(), "Course Saved Successfully", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Term Updated Successfully", Toast.LENGTH_LONG).show();
 
         });
     }

@@ -66,13 +66,13 @@ public class CourseAdd extends AppCompatActivity {
             termStart = getIntent().getStringExtra("start");
             termEnd = getIntent().getStringExtra("end");
 
-            titleInput = findViewById(R.id.AssessmentTitleInput);
-            noteInput = findViewById(R.id.assessmentDescriptionInput);
+            titleInput = findViewById(R.id.courseAddTitleInput);
+            noteInput = findViewById(R.id.courseAddNoteInput);
             statusBox = findViewById(R.id.typeBox);
             instructorBox = findViewById(R.id.instructorBox);
-            submitButton = findViewById(R.id.assessmentSubmit);
-            startDate = findViewById(R.id.startDate);
-            endDate = findViewById(R.id.endDate);
+            submitButton = findViewById(R.id.courseAddSubmit);
+            startDate = findViewById(R.id.courseAddStartDate);
+            endDate = findViewById(R.id.courseAddEndDate);
 
             startDate.setText(termStart);
             endDate.setText(termEnd);

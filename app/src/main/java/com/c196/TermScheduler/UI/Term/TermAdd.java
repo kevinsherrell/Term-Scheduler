@@ -103,7 +103,7 @@ public class TermAdd extends AppCompatActivity {
             Log.d(TAG, "onCreate: onClickSubmit");
             insertTerm();
             backToTermList();
-            Toast.makeText(getApplicationContext(), "Course Saved Successfully", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Term Saved Successfully", Toast.LENGTH_LONG).show();
 
         });
 

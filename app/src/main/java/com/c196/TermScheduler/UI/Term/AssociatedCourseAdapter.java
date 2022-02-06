@@ -50,7 +50,7 @@ public class AssociatedCourseAdapter extends RecyclerView.Adapter<AssociatedCour
         holder.titleTextView.setText(current.course.getTitle());
         holder.startTextView.setText(current.term.getStart().toString());
         holder.endTextView.setText(current.term.getEnd().toString());
-        holder.instructorTextView.setText(String.valueOf(current.course.getId()));
+        holder.instructorTextView.setText(current.course.getInstructor());
         holder.noteTextView.setText(current.course.getNote());
         holder.statusTextView.setText(current.course.getStatus());
     }
@@ -96,11 +96,15 @@ public class AssociatedCourseAdapter extends RecyclerView.Adapter<AssociatedCour
                     final CourseWithTerm current = courseList.get(position);
                     Log.d(TAG, "onClick: ");
                     Intent intent = new Intent(viewContext, CourseModify.class);
+                    intent.putExtra("termTitle", current.term.getTitle());
+                    intent.putExtra("termId", String.valueOf(current.term.getId()));
                     intent.putExtra("id", String.valueOf(current.course.getId()));
                     intent.putExtra("title", current.course.getTitle());
-                    intent.putExtra("start", current.term.getStart());
-                    intent.putExtra("end", current.term.getEnd());
+                    intent.putExtra("start", current.term.getStart().toString());
+                    intent.putExtra("end", current.term.getEnd().toString());
                     intent.putExtra("note", current.course.getNote());
+                    intent.putExtra("instructor", current.course.getInstructor());
+                    intent.putExtra("status", current.course.getStatus());
                     viewContext.startActivity(intent);
                 }
             });
@@ -116,6 +120,8 @@ public class AssociatedCourseAdapter extends RecyclerView.Adapter<AssociatedCour
                     intent.putExtra("start", current.term.getStart().toString());
                     intent.putExtra("end", current.term.getEnd().toString());
                     intent.putExtra("note", current.course.getNote());
+                    intent.putExtra("instructor", current.course.getInstructor());
+                    intent.putExtra("status", current.course.getStatus());
                     viewContext.startActivity(intent);
                 }
             });
