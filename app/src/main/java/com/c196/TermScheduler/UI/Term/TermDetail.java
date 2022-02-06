@@ -37,6 +37,7 @@ public class TermDetail extends AppCompatActivity {
         getIncomingIntent();
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Term Detail");
         recyclerView = findViewById(R.id.termDetailRecycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

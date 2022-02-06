@@ -74,25 +74,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/termDetailTitle" />
 
-    <Button
-        android:id="@+id/termDetailModifyButton"
-        android:layout_width="163dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="8dp"
-        android:text="Modify Term"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/termDetailEnd" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="56dp"
         android:text="Courses This Term"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/termDetailModifyButton" />
+        app:layout_constraintTop_toBottomOf="@+id/termDetailEnd" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

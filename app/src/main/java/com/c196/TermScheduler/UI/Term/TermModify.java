@@ -55,6 +55,7 @@ public class TermModify extends AppCompatActivity {
         getIncomingIntent();
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Modify Term");
         termModifyStartButton = findViewById(R.id.termModifyStartButton);
         termModifySubmit = findViewById(R.id.termModifySubmit);
         termModifyTitleInput = findViewById(R.id.termModifyTitleInput);

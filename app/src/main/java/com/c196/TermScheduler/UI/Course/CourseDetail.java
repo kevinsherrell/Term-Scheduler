@@ -40,6 +40,7 @@ public class CourseDetail extends AppCompatActivity {
         setContentView(R.layout.activity_course_detail);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Course Detail");
         getIncomingIntent();
         recyclerView = findViewById(R.id.courseDetailRecycler);
         recyclerView.setHasFixedSize(true);
