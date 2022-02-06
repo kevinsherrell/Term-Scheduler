@@ -1,4 +1,4 @@
-package com.c196.TermScheduler.UI.Term;
+package com.c196.TermScheduler.UI.Assessment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.c196.TermScheduler.R;
 
-public class AssessmentDetail extends AppCompatActivity {
+public class AssessmentModify extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_assessment_detail);
+        setContentView(R.layout.activity_assessment_modify);
     }
 }

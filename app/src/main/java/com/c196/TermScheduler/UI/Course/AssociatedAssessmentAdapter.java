@@ -13,10 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.c196.TermScheduler.Model.AssessmentWithCourse;
-import com.c196.TermScheduler.Model.CourseWithTerm;
 import com.c196.TermScheduler.R;
-import com.c196.TermScheduler.UI.Term.AssessmentDetail;
-import com.c196.TermScheduler.UI.Term.AssociatedCourseAdapter;
+import com.c196.TermScheduler.UI.Assessment.AssessmentDetail;
 
 import java.util.List;
 
@@ -89,7 +87,17 @@ public class AssociatedAssessmentAdapter extends RecyclerView.Adapter<Associated
                     int position = getAdapterPosition();
                     final AssessmentWithCourse current = assessmentList.get(position);
                     Intent intent = new Intent(viewContext, AssessmentDetail.class);
-                    intent.putExtra("assessment", current);
+                    intent.putExtra("id", String.valueOf(current.assessment.getId()));
+                    intent.putExtra("type", current.assessment.getType());
+                    intent.putExtra("title", current.assessment.getTitle());
+                    intent.putExtra("description", current.assessment.getDescription());
+                    intent.putExtra("date", current.assessment.getDate().toString());
+                    intent.putExtra("courseTitle", current.course.getTitle());
+                    intent.putExtra("courseId", current.course.getId());
+                    intent.putExtra("courseInstructor", current.course.getInstructor());
+                    intent.putExtra("courseNote", current.course.getNote());
+                    intent.putExtra("courseStatus", current.course.getStatus());
+                    viewContext.startActivity(intent);
                 }
             });
 

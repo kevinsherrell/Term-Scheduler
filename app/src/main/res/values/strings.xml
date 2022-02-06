@@ -4,5 +4,12 @@
     <string name="hint_word">Word...</string>
     <string name="button_save">Save</string>
     <string name="empty_not_saved">Word not saved because it is empty.</string>
+    <string name="adIDString">Assessment ID:</string>
+    <string name="adTitleString">Assessment Title:</string>
+    <string name="adDateString">Assessment Date: </string>
+    <string name="adDescriptionString">Assessment Description :</string>
+    <string name="adTypeString">Assessment Type :</string>
+    <string name="adCourseTitleString">Course Title :</string>
+    <string name="adCourseInstructorString">Course Instructor :</string>
 
 </resources>
