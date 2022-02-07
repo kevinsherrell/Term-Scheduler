@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ksher/OneDrive/Desktop/development/c196/app/src/main/res/drawable/ic_android_black_24dp.xml" value="0.18" />
+        <entry key="..\:/Users/ksher/OneDrive/Desktop/development/c196/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.18" />
+        <entry key="..\:/Users/ksher/OneDrive/Desktop/development/c196/app/src/main/res/drawable/ic_launcher_background.xml" value="0.18" />
+        <entry key="..\:/Users/ksher/OneDrive/Desktop/development/c196/app/src/main/res/drawable/icon.xml" value="0.18" />
+        <entry key="..\:/Users/ksher/OneDrive/Desktop/development/c196/app/src/main/res/drawable/mydrawable.xml" value="0.18" />
         <entry key="..\:/Users/ksher/OneDrive/Desktop/development/c196/app/src/main/res/layout-land/activity_assessment_add.xml" value="0.2515625" />
         <entry key="..\:/Users/ksher/OneDrive/Desktop/development/c196/app/src/main/res/layout-land/activity_assessment_detail.xml" value="0.5572916666666666" />
         <entry key="..\:/Users/ksher/OneDrive/Desktop/development/c196/app/src/main/res/layout-land/activity_assessment_modify.xml" value="0.4234375" />
@@ -29,6 +34,7 @@
         <entry key="..\:/Users/ksher/OneDrive/Desktop/development/c196/app/src/main/res/layout/activity_term_recyclerview_course_item.xml" value="0.15121580547112462" />
         <entry key="..\:/Users/ksher/OneDrive/Desktop/development/c196/app/src/main/res/layout/activity_term_recyclerview_item.xml" value="0.5" />
         <entry key="..\:/Users/ksher/OneDrive/Desktop/development/c196/app/src/main/res/layout/activity_test.xml" value="0.23007246376811594" />
+        <entry key="..\:/Users/ksher/OneDrive/Desktop/development/c196/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.18" />
         <entry key="..\:/Users/ksher/OneDrive/Desktop/term_scheduler - Copy/app/src/main/res/layout/activity_assessment.xml" value="0.31197916666666664" />
         <entry key="..\:/Users/ksher/OneDrive/Desktop/term_scheduler - Copy/app/src/main/res/layout/activity_assessment_add.xml" value="0.31197916666666664" />
         <entry key="..\:/Users/ksher/OneDrive/Desktop/term_scheduler - Copy/app/src/main/res/layout/activity_assessment_detail.xml" value="0.31197916666666664" />
