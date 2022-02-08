@@ -55,17 +55,6 @@ public class TermAdd extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_add);
-        createNotificationChannel();
-        AlarmManager startManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        AlarmManager endManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        Intent startIntent = new Intent(TermAdd.this, TermReceiver.class);
-        startIntent.putExtra("TITLE", "TERM START");
-        startIntent.putExtra("TEXT", "You have a course starting today.");
-        Intent endIntent = new Intent(TermAdd.this, TermReceiver.class);
-        endIntent.putExtra("TITLE", "TERM END");
-        endIntent.putExtra("TEXT", "You have a course ending today");
-        PendingIntent startIntentP = PendingIntent.getBroadcast(TermAdd.this, 0, startIntent, 0);
-        PendingIntent endIntentP = PendingIntent.getBroadcast(TermAdd.this, 1, endIntent, 0);
 
 
         termAddStartButton = findViewById(R.id.termAddStartButton);
@@ -128,7 +117,7 @@ public class TermAdd extends AppCompatActivity {
 
         termAddSubmit.setOnClickListener(view -> {
             Log.d(TAG, "onCreate: onClickSubmit");
-            insertTerm(startManager, endManager, startIntentP, endIntentP);
+            insertTerm();
             backToTermList();
             Toast.makeText(getApplicationContext(), "Term Saved Successfully", Toast.LENGTH_LONG).show();
 
@@ -136,7 +125,7 @@ public class TermAdd extends AppCompatActivity {
 
     }
 
-    public void insertTerm(AlarmManager startManager, AlarmManager endManager, PendingIntent startIntentP, PendingIntent endIntentP) {
+    public void insertTerm() {
         model = new ViewModelProvider.AndroidViewModelFactory(TermAdd.this.getApplication()).create(TermViewModel.class);
         String title = termAddTitleInput.getText().toString();
 //        Date date = Date.from(Instant.parse(termAddDateText.toString()));
@@ -144,8 +133,7 @@ public class TermAdd extends AppCompatActivity {
         Term term = new Term(title, startDate, endDate);
         Log.d(TAG, "insertTerm: new term start" + term.getStart().getTime());
         model.insert(term);
-        startManager.set(AlarmManager.RTC_WAKEUP, term.getStart().getTime(), startIntentP);
-        endManager.set(AlarmManager.RTC_WAKEUP, term.getEnd().getTime(), endIntentP);
+
     }
 
     public void backToTermList() {
@@ -153,21 +141,4 @@ public class TermAdd extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void showDatePicker() {
-
-    }
-
-    private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "termReminderChannel";
-            String description = "Channel for term reminders";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("termNotify", name, importance);
-            channel.setDescription(description);
-
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-
-    }
 }

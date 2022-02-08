@@ -45,7 +45,7 @@ public class AssociatedCourseAdapter extends RecyclerView.Adapter<AssociatedCour
     @Override
     public void onBindViewHolder(@NonNull AssociatedCourseAdapter.ViewHolder holder, int position) {
         CourseWithTerm current = courseList.get(position);
-
+        Log.d(TAG, "onBindViewHolder: " + current.term.getStart().getTime());
         holder.idTextView.setText(String.valueOf(current.course.getId()));
         holder.titleTextView.setText(current.course.getTitle());
         holder.startTextView.setText(current.term.getStart().toString());

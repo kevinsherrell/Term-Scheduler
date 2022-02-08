@@ -3,7 +3,12 @@ package com.c196.TermScheduler.UI.Term;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -16,6 +21,10 @@ import android.widget.Toast;
 import com.c196.TermScheduler.Model.Course;
 import com.c196.TermScheduler.Model.CourseViewModel;
 import com.c196.TermScheduler.R;
+import com.c196.TermScheduler.Utils.TermReceiver;
+
+import java.sql.Date;
+import java.time.Instant;
 
 public class CourseAdd extends AppCompatActivity {
     //    public static final String EXTRA_REPLY = "com.c196.TermScheduler.REPLY";
@@ -39,7 +48,22 @@ public class CourseAdd extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_add);
         getIncomingIntent();
+        createNotificationChannel();
+        AlarmManager startManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        AlarmManager endManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent startIntent = new Intent(CourseAdd.this, TermReceiver.class);
+        startIntent.putExtra("TITLE", "CURSE START");
+        startIntent.putExtra("TEXT", "You have a course starting today.");
+        Intent endIntent = new Intent(CourseAdd.this, TermReceiver.class);
+        endIntent.putExtra("TITLE", "COURSE END");
+        endIntent.putExtra("TEXT", "You have a course ending today");
+        PendingIntent startIntentP = PendingIntent.getBroadcast(CourseAdd.this, 0, startIntent, 0);
+        PendingIntent endIntentP = PendingIntent.getBroadcast(CourseAdd.this, 1, endIntent, 0);
 
+
+
+
+        Log.d("courseadd", "onCreate: " + Date.parse(termStart));
         ArrayAdapter<CharSequence> instructorAdapter = ArrayAdapter.createFromResource(this,
                 R.array.instructor_array, android.R.layout.simple_spinner_item);
         instructorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -53,7 +77,7 @@ public class CourseAdd extends AppCompatActivity {
         submitButton.setOnClickListener(view -> {
             Log.d("ONCLICK COURSE ADD", "onCreate: ");
 
-            createCourse();
+            createCourse(startManager, endManager, startIntentP, endIntentP);
             backToTermDetail();
             Toast.makeText(getApplicationContext(), "Course Saved Successfully", Toast.LENGTH_LONG).show();
         });
@@ -81,7 +105,7 @@ public class CourseAdd extends AppCompatActivity {
 
     }
 
-    public void createCourse() {
+    public void createCourse(AlarmManager startManager, AlarmManager endManager, PendingIntent startIntentP, PendingIntent endIntentP) {
         model = new ViewModelProvider.AndroidViewModelFactory(CourseAdd.this.getApplication()).create(CourseViewModel.class);
         String instructor = instructorBox.getSelectedItem().toString();
         String status = statusBox.getSelectedItem().toString();
@@ -96,11 +120,25 @@ public class CourseAdd extends AppCompatActivity {
         }
         Course course = new Course(instructor, note, title, status, id);
         model.insert(course);
-
+        startManager.set(AlarmManager.RTC_WAKEUP, Date.parse(termStart), startIntentP);
+        endManager.set(AlarmManager.RTC_WAKEUP, Date.parse(termEnd), endIntentP);
     }
 
     public void backToTermDetail() {
         Intent intent = new Intent(CourseAdd.this, TermList.class);
         startActivity(intent);
+    }
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "termReminderChannel";
+            String description = "Channel for term reminders";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("termNotify", name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+
     }
 }
