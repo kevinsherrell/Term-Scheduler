@@ -12,15 +12,17 @@ import androidx.core.app.NotificationManagerCompat;
 import com.c196.TermScheduler.R;
 
 public class TermReceiver extends BroadcastReceiver {
-    static int notificationID;
+    static int notificationID = 0;
     String channel_id = "term";
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        String TITLE = intent.getStringExtra("TITLE");
+        String TEXT = intent.getStringExtra("TEXT");
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "termNotify")
                 .setSmallIcon(R.drawable.ic_android_black_24dp)
-                .setContentTitle("Course Notification")
-                .setContentText("Woo hoo you have a course/course starting today!!")
+                .setContentTitle(TITLE)
+                .setContentText(TEXT)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);

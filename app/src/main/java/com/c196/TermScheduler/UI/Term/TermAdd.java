@@ -56,9 +56,16 @@ public class TermAdd extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_add);
         createNotificationChannel();
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        Intent intent = new Intent(TermAdd.this, TermReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(TermAdd.this, 0, intent, 0);
+        AlarmManager startManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        AlarmManager endManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent startIntent = new Intent(TermAdd.this, TermReceiver.class);
+        startIntent.putExtra("TITLE", "TERM START");
+        startIntent.putExtra("TEXT", "You have a term starting today.");
+        Intent endIntent = new Intent(TermAdd.this, TermReceiver.class);
+        endIntent.putExtra("TITLE", "TERM END");
+        endIntent.putExtra("TEXT", "You have a term ending today");
+        PendingIntent startIntentP = PendingIntent.getBroadcast(TermAdd.this, 0, startIntent, 0);
+        PendingIntent endIntentP = PendingIntent.getBroadcast(TermAdd.this, 1, endIntent, 0);
 
 
         termAddStartButton = findViewById(R.id.termAddStartButton);
@@ -121,7 +128,7 @@ public class TermAdd extends AppCompatActivity {
 
         termAddSubmit.setOnClickListener(view -> {
             Log.d(TAG, "onCreate: onClickSubmit");
-            insertTerm(alarmManager, pendingIntent);
+            insertTerm(startManager, endManager, startIntentP, endIntentP);
             backToTermList();
             Toast.makeText(getApplicationContext(), "Term Saved Successfully", Toast.LENGTH_LONG).show();
 
@@ -129,7 +136,7 @@ public class TermAdd extends AppCompatActivity {
 
     }
 
-    public void insertTerm(AlarmManager alarmManager, PendingIntent pendingIntent) {
+    public void insertTerm(AlarmManager startManager, AlarmManager endManager, PendingIntent startIntentP, PendingIntent endIntentP) {
         model = new ViewModelProvider.AndroidViewModelFactory(TermAdd.this.getApplication()).create(TermViewModel.class);
         String title = termAddTitleInput.getText().toString();
 //        Date date = Date.from(Instant.parse(termAddDateText.toString()));
@@ -137,7 +144,8 @@ public class TermAdd extends AppCompatActivity {
         Term term = new Term(title, startDate, endDate);
         Log.d(TAG, "insertTerm: new term start" + term.getStart().getTime());
         model.insert(term);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, term.getStart().getTime(), pendingIntent);
+        startManager.set(AlarmManager.RTC_WAKEUP, term.getStart().getTime(), startIntentP);
+        endManager.set(AlarmManager.RTC_WAKEUP, term.getEnd().getTime(), endIntentP);
     }
 
     public void backToTermList() {
@@ -148,6 +156,7 @@ public class TermAdd extends AppCompatActivity {
     public void showDatePicker() {
 
     }
+
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "termReminderChannel";
