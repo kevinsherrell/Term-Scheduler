@@ -60,10 +60,10 @@ public class TermAdd extends AppCompatActivity {
         AlarmManager endManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent startIntent = new Intent(TermAdd.this, TermReceiver.class);
         startIntent.putExtra("TITLE", "TERM START");
-        startIntent.putExtra("TEXT", "You have a term starting today.");
+        startIntent.putExtra("TEXT", "You have a course starting today.");
         Intent endIntent = new Intent(TermAdd.this, TermReceiver.class);
         endIntent.putExtra("TITLE", "TERM END");
-        endIntent.putExtra("TEXT", "You have a term ending today");
+        endIntent.putExtra("TEXT", "You have a course ending today");
         PendingIntent startIntentP = PendingIntent.getBroadcast(TermAdd.this, 0, startIntent, 0);
         PendingIntent endIntentP = PendingIntent.getBroadcast(TermAdd.this, 1, endIntent, 0);
 

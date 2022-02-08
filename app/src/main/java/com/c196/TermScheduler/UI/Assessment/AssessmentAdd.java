@@ -5,10 +5,15 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -24,6 +29,8 @@ import com.c196.TermScheduler.Model.Assessment;
 import com.c196.TermScheduler.Model.AssessmentViewModel;
 import com.c196.TermScheduler.R;
 import com.c196.TermScheduler.UI.Course.CourseDetail;
+import com.c196.TermScheduler.UI.Term.TermAdd;
+import com.c196.TermScheduler.Utils.TermReceiver;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -54,6 +61,13 @@ public class AssessmentAdd extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assessment_add);
+        createNotificationChannel();
+        AlarmManager startManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent startIntent = new Intent(AssessmentAdd.this, TermReceiver.class);
+        startIntent.putExtra("TITLE", "ASSESSMENT");
+        startIntent.putExtra("TEXT", "You have an assessment today");
+        PendingIntent startIntentP = PendingIntent.getBroadcast(AssessmentAdd.this, 3, startIntent, 0);
+
         getIncomingIntent();
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -114,7 +128,7 @@ public class AssessmentAdd extends AppCompatActivity {
         assessmentSubmit.setOnClickListener(view -> {
             Log.d(TAG, "onCreate: ");
 
-            insertAssessment();
+            insertAssessment(startManager, startIntentP);
             backToCourseDetail();
             Toast.makeText(getApplicationContext(), "Assessment Saved Successfully", Toast.LENGTH_LONG).show();
 
@@ -141,7 +155,7 @@ public class AssessmentAdd extends AppCompatActivity {
         }
     }
 
-    public void insertAssessment() {
+    public void insertAssessment(AlarmManager alarmManager, PendingIntent startIntent) {
         model = new ViewModelProvider.AndroidViewModelFactory(AssessmentAdd.this.getApplication()).create(AssessmentViewModel.class);
         int id = Integer.parseInt(courseId);
         String type = typeBox.getSelectedItem().toString();
@@ -150,6 +164,7 @@ public class AssessmentAdd extends AppCompatActivity {
         Date assessmentDate = Date.from(lDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         Assessment assessment = new Assessment(type, title, description, assessmentDate, id);
         Log.d(TAG, "insertAssessment: " + type + " " + title + " " + description + " " + assessmentDate + " " + id);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, assessment.getDate().getTime(), startIntent);
         model.insert(assessment);
     }
 
@@ -171,5 +186,19 @@ public class AssessmentAdd extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "termReminderChannel";
+            String description = "Channel for term reminders";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("termNotify", name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+
     }
 }
