@@ -18,6 +18,8 @@ import com.c196.TermScheduler.DB.SchedulerDB;
 import com.c196.TermScheduler.Data.SchedulerRepository;
 import com.c196.TermScheduler.Model.Assessment;
 import com.c196.TermScheduler.Model.AssessmentWithCourse;
+import com.c196.TermScheduler.Model.CourseWithTerm;
+import com.c196.TermScheduler.Model.Term;
 import com.c196.TermScheduler.R;
 import com.c196.TermScheduler.UI.Assessment.AssessmentDetail;
 import com.c196.TermScheduler.UI.Assessment.AssessmentModify;
@@ -27,6 +29,7 @@ import java.util.List;
 public class AssociatedAssessmentAdapter extends RecyclerView.Adapter<AssociatedAssessmentAdapter.ViewHolder> {
     private String TAG = "AssociatedCourseAdapter";
     private final List<AssessmentWithCourse> assessmentList;
+    Term currentTerm;
 
     public AssociatedAssessmentAdapter(List<AssessmentWithCourse> assessmentList) {
         this.assessmentList = assessmentList;
@@ -43,15 +46,6 @@ public class AssociatedAssessmentAdapter extends RecyclerView.Adapter<Associated
     @Override
     public void onBindViewHolder(@NonNull AssociatedAssessmentAdapter.ViewHolder holder, int position) {
         AssessmentWithCourse current = assessmentList.get(position);
-
-        // COME BACK THIS LATER
-//        holder.idTextView.setText(String.valueOf(current.assessment.getId()));
-//        holder.titleTextView.setText(current.assessment.getTitle());
-//        holder.startTextView.setText(current.term.getStart().toString());
-//        holder.endTextView.setText(current.term.getEnd().toString());
-//        holder.instructorTextView.setText(String.valueOf(current.course.getId()));
-//        holder.noteTextView.setText(current.course.getNote());
-//        holder.statusTextView.setText(current.course.getStatus());
 
         holder.idTextView.setText(String.valueOf(current.assessment.getId()));
         holder.titleTextView.setText(current.assessment.getTitle());
@@ -93,8 +87,15 @@ public class AssociatedAssessmentAdapter extends RecyclerView.Adapter<Associated
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
+
                     final AssessmentWithCourse current = assessmentList.get(position);
+                    SchedulerRepository repository = new SchedulerRepository((Application) viewContext.getApplicationContext());
+                    SchedulerDB.databaseWriteExecutor.execute(() -> {
+                        currentTerm = repository.getTermById(current.course.getTermId());
+                    });
+
                     Intent intent = new Intent(viewContext, AssessmentDetail.class);
+
                     intent.putExtra("id", String.valueOf(current.assessment.getId()));
                     intent.putExtra("type", current.assessment.getType());
                     intent.putExtra("title", current.assessment.getTitle());

@@ -73,6 +73,7 @@ public class AssessmentModify extends AppCompatActivity {
         setContentView(R.layout.activity_assessment_add);
         getIncomingIntent();
         ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Modify Assessment");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this,

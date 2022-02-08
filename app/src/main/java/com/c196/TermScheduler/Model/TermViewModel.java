@@ -23,7 +23,7 @@ public class TermViewModel extends AndroidViewModel {
 
     public LiveData<List<Term>> getAllTerms(){return allTerms;}
     public static void insert(Term term) {repository.insertTerm(term);}
-    public LiveData<Term> getTermById(int id){return repository.getTermById(id);}
+    public Term getTermById(int id){return repository.getTermById(id);}
     public static void update(Term term){repository.updateTerm(term);}
     public static void delete(Term term){repository.deleteTerm(term);}
 }

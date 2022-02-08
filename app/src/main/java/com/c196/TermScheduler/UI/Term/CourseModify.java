@@ -53,7 +53,7 @@ public class CourseModify extends AppCompatActivity {
         getIncomingIntent();
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Term Detail");
+        actionBar.setTitle("Modify Course");
 //        ArrayAdapter<CharSequence> instructorAdapter = ArrayAdapter.createFromResource(this,
 //                R.array.instructor_array, android.R.layout.simple_spinner_item);
         ArrayAdapter<String> instructorAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, instructorList);

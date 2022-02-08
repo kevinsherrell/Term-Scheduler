@@ -1,5 +1,6 @@
 package com.c196.TermScheduler.UI.Term;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -27,7 +28,6 @@ import java.sql.Date;
 import java.time.Instant;
 
 public class CourseAdd extends AppCompatActivity {
-    //    public static final String EXTRA_REPLY = "com.c196.TermScheduler.REPLY";
     public EditText titleInput;
     public Spinner statusBox;
     public Spinner instructorBox;
@@ -60,8 +60,9 @@ public class CourseAdd extends AppCompatActivity {
         PendingIntent startIntentP = PendingIntent.getBroadcast(CourseAdd.this, 0, startIntent, 0);
         PendingIntent endIntentP = PendingIntent.getBroadcast(CourseAdd.this, 1, endIntent, 0);
 
-
-
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Add Course");
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         Log.d("courseadd", "onCreate: " + Date.parse(termStart));
         ArrayAdapter<CharSequence> instructorAdapter = ArrayAdapter.createFromResource(this,

@@ -1,5 +1,6 @@
 package com.c196.TermScheduler.UI.Term;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -56,6 +57,9 @@ public class TermAdd extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_add);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Add Term");
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         termAddStartButton = findViewById(R.id.termAddStartButton);
 

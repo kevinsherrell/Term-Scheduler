@@ -67,7 +67,6 @@ public class AssessmentDetail extends AppCompatActivity {
     }
     public void goHome(){
         Intent intent = new Intent(AssessmentDetail.this, TermList.class);
-//        intent.putExtra("id", courseid)
         startActivity(intent);
 
 

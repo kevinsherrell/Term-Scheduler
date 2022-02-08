@@ -55,7 +55,17 @@ public class CourseDetail extends AppCompatActivity {
             adapter = new AssociatedAssessmentAdapter((Assessments));
             recyclerView.setAdapter(adapter);
         });
+        Button shareNoteButton = findViewById(R.id.shareNoteButton);
 
+        shareNoteButton.setOnClickListener(view->{
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, note);
+            sendIntent.putExtra(Intent.EXTRA_TITLE, "Here are my course notes");
+            sendIntent.setType("text/plain");
+            Intent shareIntent = Intent.createChooser(sendIntent, null);
+            startActivity(shareIntent);
+        });
         Button addAssessment = findViewById(R.id.addAssessment);
         addAssessment.setOnClickListener(view -> {
             Intent intent = new Intent(CourseDetail.this, AssessmentAdd.class);
@@ -89,6 +99,7 @@ public class CourseDetail extends AppCompatActivity {
             TextView noteView = findViewById(R.id.courseNoteDetail);
             TextView courseInstructorView = findViewById(R.id.courseInstructorView);
             TextView statusView = findViewById(R.id.statusView);
+
 
             id = getIntent().getStringExtra("id");
             title = getIntent().getStringExtra("title");

@@ -48,7 +48,6 @@ public class TermList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term);
-//        createNotificationChannel();
 
         recyclerView = findViewById(R.id.termRecyclerview);
         recyclerView.setHasFixedSize(true);
@@ -65,55 +64,6 @@ public class TermList extends AppCompatActivity {
         });
 
 
-        /////////////////////////////////////////////////////
-//        Calendar cal = Calendar.getInstance();
-//        int year = cal.get(Calendar.YEAR);
-//        int month = cal.get(Calendar.MONTH);
-//        int day = cal.get(Calendar.DAY_OF_MONTH);
-//        month = month + 1;
-//        String dateFromPicker = "";
-//        String monthString;
-//        String dayString;
-//        if (month < 10) {
-//            monthString = "0" + month;
-//        } else {
-//            monthString = String.valueOf(month);
-//        }
-//        if (day < 10) {
-//            dayString = "0" + day;
-//        } else {
-//            dayString = String.valueOf(day);
-//        }
-//        dateFromPicker = String.format("%d-%s-%s", year, monthString, dayString);
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//        lDate = LocalDate.parse(dateFromPicker, formatter);
-//        startDate = Date.from(lDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-//        Date endDate = Date.from(lDate.atStartOfDay(ZoneId.systemDefault()).plusMonths(6).toInstant());
-//
-//        String myFormat = "MM/dd/yy";
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(myFormat, Locale.US);
-//
-//        Log.d(TAG, "onCreate: SIMPLE DATE" + simpleDateFormat.format(startDate));
-//
-//        Log.d(TAG, "onDateSet: " + startDate);
-        ////////////////////////////////////////////////////////
-//        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-//        Intent intent = new Intent(TermList.this, TermReceiver.class);
-//        PendingIntent pendingIntent = PendingIntent.getBroadcast(TermList.this, 0, intent, 0);
-
-
-        //delete later
-//        for (Term term : listOfTerms) {
-//
-//            if (startDate.getDate() == term.getStart().getDate() &&
-//                    startDate.getMonth() == term.getStart().getMonth() &&
-//                    startDate.getYear() == term.getStart().getYear() && termNotificationCount < 1) {
-//                Log.d(TAG, "onCreate: DATES ARE EQUAL");
-//                termNotificationCount++;
-//                alarmManager.set(AlarmManager.RTC_WAKEUP, term.getStart().getTime(), pendingIntent);
-//            }
-//
-//        }
 
         ExtendedFloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {

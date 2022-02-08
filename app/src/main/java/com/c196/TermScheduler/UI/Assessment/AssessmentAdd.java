@@ -70,6 +70,7 @@ public class AssessmentAdd extends AppCompatActivity {
 
         getIncomingIntent();
         ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Add Assessment");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this,

@@ -36,7 +36,7 @@ public interface TermDAO {
     LiveData<List<Term>> getAllTerms();
 
     @Query("SELECT * FROM term_table WHERE term_table.term_id == :id")
-    LiveData<Term> getTermById(int id);
+    Term getTermById(int id);
 
 
 }
