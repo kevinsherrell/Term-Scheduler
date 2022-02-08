@@ -3,6 +3,9 @@ plugins {
 }
 
 android {
+    lintOptions{
+        checkReleaseBuilds false
+    }
     compileSdk 32
 
     defaultConfig {

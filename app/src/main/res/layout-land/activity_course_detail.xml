@@ -167,12 +167,21 @@
         android:id="@+id/shareNoteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginEnd="32dp"
         android:text="Share"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/addAssessment"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statusView"
-        app:layout_constraintVertical_bias="0.542" />
+        app:layout_constraintEnd_toStartOf="@+id/courseDetailRecycler"
+        app:layout_constraintStart_toEndOf="@+id/courseNoteDetail"
+        app:layout_constraintTop_toBottomOf="@+id/courseDetailEnd" />
+
+    <Button
+        android:id="@+id/courseDetailAlarmButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="216dp"
+        android:text="Set Alert"
+        app:layout_constraintEnd_toStartOf="@+id/courseDetailRecycler"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/statusView"
+        app:layout_constraintTop_toBottomOf="@+id/statusView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

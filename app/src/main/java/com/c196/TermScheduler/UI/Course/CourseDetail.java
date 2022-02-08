@@ -7,8 +7,13 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -18,12 +23,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.c196.TermScheduler.Model.AssessmentViewModel;
+import com.c196.TermScheduler.Model.Course;
 import com.c196.TermScheduler.Model.CourseViewModel;
 import com.c196.TermScheduler.R;
 import com.c196.TermScheduler.UI.Assessment.AssessmentAdd;
+import com.c196.TermScheduler.UI.Assessment.AssessmentDetail;
 import com.c196.TermScheduler.UI.Term.AssociatedCourseAdapter;
 import com.c196.TermScheduler.UI.Term.CourseAdd;
 import com.c196.TermScheduler.UI.Term.TermDetail;
+import com.c196.TermScheduler.Utils.TermReceiver;
+
+import java.sql.Date;
 
 public class CourseDetail extends AppCompatActivity {
     public AssessmentViewModel model;
@@ -37,11 +47,12 @@ public class CourseDetail extends AppCompatActivity {
     private static String note;
     private static String status;
     private static String instructor;
-
+    public Button alertButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_detail);
+        createNotificationChannel();
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Course Detail");
@@ -56,6 +67,22 @@ public class CourseDetail extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
         });
         Button shareNoteButton = findViewById(R.id.shareNoteButton);
+        alertButton = findViewById(R.id.courseDetailAlarmButton);
+        alertButton.setOnClickListener(view->{
+            Intent startIntent = new Intent(CourseDetail.this, TermReceiver.class);
+            startIntent.putExtra("TITLE", "CURSE START");
+            startIntent.putExtra("TEXT", "You have a course starting today.");
+            Intent endIntent = new Intent(CourseDetail.this, TermReceiver.class);
+            endIntent.putExtra("TITLE", "COURSE END");
+            endIntent.putExtra("TEXT", "You have a course ending today");
+            PendingIntent startIntentP = PendingIntent.getBroadcast(CourseDetail.this, 0, startIntent, 0);
+            PendingIntent endIntentP = PendingIntent.getBroadcast(CourseDetail.this, 1, endIntent, 0);
+            AlarmManager startManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            AlarmManager endManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            startManager.set(AlarmManager.RTC_WAKEUP, Date.parse(start), startIntentP);
+            endManager.set(AlarmManager.RTC_WAKEUP, Date.parse(end), endIntentP);
+            Toast.makeText(getApplicationContext(), "Alerts have been set for : " + start + " and " + end ,Toast.LENGTH_LONG).show();
+        });
 
         shareNoteButton.setOnClickListener(view->{
             Intent sendIntent = new Intent();
@@ -121,5 +148,18 @@ public class CourseDetail extends AppCompatActivity {
 
     public static void showToast(Context context, final String message) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+    }
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "termReminderChannel";
+            String description = "Channel for term reminders";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("termNotify", name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+
     }
 }

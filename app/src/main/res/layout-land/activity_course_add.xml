@@ -10,11 +10,13 @@
         android:id="@+id/courseAddTitleInput"
         android:layout_width="312dp"
         android:layout_height="48dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Title"
-        tools:layout_editor_absoluteX="58dp"
-        tools:layout_editor_absoluteY="78dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView6"
@@ -52,14 +54,15 @@
         app:layout_constraintStart_toStartOf="@+id/courseAddStartDate"
         app:layout_constraintTop_toBottomOf="@+id/courseAddStartDate" />
 
-    <Spinner
-        android:id="@+id/typeBox"
-        android:layout_width="210dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintStart_toStartOf="@+id/courseAddStartDate"
-        app:layout_constraintTop_toBottomOf="@+id/instructorBox"
-        tools:ignore="SpeakableTextPresentCheck" />
+    <TextView
+        android:id="@+id/courseAddStartDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/courseAddTitleInput" />
 
     <Spinner
         android:id="@+id/instructorBox"
@@ -70,15 +73,14 @@
         app:layout_constraintTop_toBottomOf="@+id/courseAddEndDate"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <TextView
-        android:id="@+id/courseAddStartDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/courseAddTitleInput" />
+    <Spinner
+        android:id="@+id/typeBox"
+        android:layout_width="210dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toStartOf="@+id/courseAddStartDate"
+        app:layout_constraintTop_toBottomOf="@+id/instructorBox"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textView5"
@@ -130,7 +132,7 @@
     <Button
         android:id="@+id/courseAddSubmit"
         android:layout_width="210dp"
-        android:layout_height="42dp"
+        android:layout_height="48dp"
         android:text="Submit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

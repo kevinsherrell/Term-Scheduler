@@ -61,12 +61,12 @@ public class AssessmentAdd extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assessment_add);
-        createNotificationChannel();
-        AlarmManager startManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        Intent startIntent = new Intent(AssessmentAdd.this, TermReceiver.class);
-        startIntent.putExtra("TITLE", "ASSESSMENT");
-        startIntent.putExtra("TEXT", "You have an assessment today");
-        PendingIntent startIntentP = PendingIntent.getBroadcast(AssessmentAdd.this, 3, startIntent, 0);
+//        createNotificationChannel();
+//        AlarmManager startManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+//        Intent startIntent = new Intent(AssessmentAdd.this, TermReceiver.class);
+//        startIntent.putExtra("TITLE", "ASSESSMENT");
+//        startIntent.putExtra("TEXT", "You have an assessment today");
+//        PendingIntent startIntentP = PendingIntent.getBroadcast(AssessmentAdd.this, 3, startIntent, 0);
 
         getIncomingIntent();
         ActionBar actionBar = getSupportActionBar();
@@ -129,7 +129,8 @@ public class AssessmentAdd extends AppCompatActivity {
         assessmentSubmit.setOnClickListener(view -> {
             Log.d(TAG, "onCreate: ");
 
-            insertAssessment(startManager, startIntentP);
+            insertAssessment();
+//            insertAssessment(startManager, startIntentP);
             backToCourseDetail();
             Toast.makeText(getApplicationContext(), "Assessment Saved Successfully", Toast.LENGTH_LONG).show();
 
@@ -156,7 +157,7 @@ public class AssessmentAdd extends AppCompatActivity {
         }
     }
 
-    public void insertAssessment(AlarmManager alarmManager, PendingIntent startIntent) {
+    public void insertAssessment() {
         model = new ViewModelProvider.AndroidViewModelFactory(AssessmentAdd.this.getApplication()).create(AssessmentViewModel.class);
         int id = Integer.parseInt(courseId);
         String type = typeBox.getSelectedItem().toString();
@@ -165,7 +166,6 @@ public class AssessmentAdd extends AppCompatActivity {
         Date assessmentDate = Date.from(lDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         Assessment assessment = new Assessment(type, title, description, assessmentDate, id);
         Log.d(TAG, "insertAssessment: " + type + " " + title + " " + description + " " + assessmentDate + " " + id);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, assessment.getDate().getTime(), startIntent);
         model.insert(assessment);
     }
 
@@ -189,17 +189,17 @@ public class AssessmentAdd extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "termReminderChannel";
-            String description = "Channel for term reminders";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("termNotify", name, importance);
-            channel.setDescription(description);
-
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-
-    }
+//    private void createNotificationChannel() {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            CharSequence name = "termReminderChannel";
+//            String description = "Channel for term reminders";
+//            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+//            NotificationChannel channel = new NotificationChannel("termNotify", name, importance);
+//            channel.setDescription(description);
+//
+//            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+//            notificationManager.createNotificationChannel(channel);
+//        }
+//
+//    }
 }

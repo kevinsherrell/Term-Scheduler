@@ -134,6 +134,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.ViewHolder> {
 
 
                 }
+
             }));
         }
     }
