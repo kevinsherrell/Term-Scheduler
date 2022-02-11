@@ -20,7 +20,7 @@ public class TermReceiver extends BroadcastReceiver {
         String TITLE = intent.getStringExtra("TITLE");
         String TEXT = intent.getStringExtra("TEXT");
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "termNotify")
-                .setSmallIcon(R.drawable.ic_android_black_24dp)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle(TITLE)
                 .setContentText(TEXT)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
