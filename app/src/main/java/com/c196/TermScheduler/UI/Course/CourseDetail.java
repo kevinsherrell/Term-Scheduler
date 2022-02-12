@@ -47,7 +47,11 @@ public class CourseDetail extends AppCompatActivity {
     private static String note;
     private static String status;
     private static String instructor;
+    private static String instructorName;
+    private static String instructorPhone;
+    private static String instructorEmail;
     public Button alertButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +72,7 @@ public class CourseDetail extends AppCompatActivity {
         });
         Button shareNoteButton = findViewById(R.id.shareNoteButton);
         alertButton = findViewById(R.id.courseDetailAlarmButton);
-        alertButton.setOnClickListener(view->{
+        alertButton.setOnClickListener(view -> {
             Intent startIntent = new Intent(CourseDetail.this, TermReceiver.class);
             startIntent.putExtra("TITLE", "CURSE START");
             startIntent.putExtra("TEXT", "You have a course starting today.");
@@ -81,10 +85,10 @@ public class CourseDetail extends AppCompatActivity {
             AlarmManager endManager = (AlarmManager) getSystemService(ALARM_SERVICE);
             startManager.set(AlarmManager.RTC_WAKEUP, Date.parse(start), startIntentP);
             endManager.set(AlarmManager.RTC_WAKEUP, Date.parse(end), endIntentP);
-            Toast.makeText(getApplicationContext(), "Alerts have been set for : " + start + " and " + end ,Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Alerts have been set for : " + start + " and " + end, Toast.LENGTH_LONG).show();
         });
 
-        shareNoteButton.setOnClickListener(view->{
+        shareNoteButton.setOnClickListener(view -> {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
             sendIntent.putExtra(Intent.EXTRA_TEXT, note);
@@ -133,7 +137,9 @@ public class CourseDetail extends AppCompatActivity {
             start = getIntent().getStringExtra("start");
             end = getIntent().getStringExtra("end");
             note = getIntent().getStringExtra("note");
-            instructor = getIntent().getStringExtra("instructor");
+            instructorName = getIntent().getStringExtra("instructorName");
+            instructorPhone = getIntent().getStringExtra("instructorPhone");
+            instructorEmail = getIntent().getStringExtra("instructorEmail");
             status = getIntent().getStringExtra("status");
 
             idView.setText(id);
@@ -141,7 +147,7 @@ public class CourseDetail extends AppCompatActivity {
             startView.setText(start);
             endView.setText(end);
             noteView.setText(note);
-            courseInstructorView.setText(instructor);
+            courseInstructorView.setText("instructor: " + instructorName + " " + instructorPhone + " " + instructorEmail);
             statusView.setText(status);
         }
     }
@@ -149,6 +155,7 @@ public class CourseDetail extends AppCompatActivity {
     public static void showToast(Context context, final String message) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
+
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "termReminderChannel";

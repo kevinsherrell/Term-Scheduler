@@ -48,9 +48,9 @@ public class AssociatedCourseAdapter extends RecyclerView.Adapter<AssociatedCour
         Log.d(TAG, "onBindViewHolder: " + current.term.getStart().getTime());
         holder.idTextView.setText(String.valueOf(current.course.getId()));
         holder.titleTextView.setText(current.course.getTitle());
-        holder.startTextView.setText(current.term.getStart().toString());
-        holder.endTextView.setText(current.term.getEnd().toString());
-        holder.instructorTextView.setText(current.course.getInstructor());
+        holder.startTextView.setText(current.course.getStart().toString());
+        holder.endTextView.setText(current.course.getEnd().toString());
+//        holder.instructorTextView.setText(current.course.getInstructor());
         holder.noteTextView.setText(current.course.getNote());
         holder.statusTextView.setText(current.course.getStatus());
     }
@@ -98,12 +98,17 @@ public class AssociatedCourseAdapter extends RecyclerView.Adapter<AssociatedCour
                     Intent intent = new Intent(viewContext, CourseModify.class);
                     intent.putExtra("termTitle", current.term.getTitle());
                     intent.putExtra("termId", String.valueOf(current.term.getId()));
+                    intent.putExtra("termStart", current.term.getStart().toString());
+                    intent.putExtra("termEnd", current.term.getEnd().toString());
                     intent.putExtra("id", String.valueOf(current.course.getId()));
                     intent.putExtra("title", current.course.getTitle());
-                    intent.putExtra("start", current.term.getStart().toString());
-                    intent.putExtra("end", current.term.getEnd().toString());
+                    intent.putExtra("start", current.course.getStart().toString());
+                    intent.putExtra("end", current.course.getEnd().toString());
+                    intent.putExtra("instructorName",current.course.getInstructorName());
+                    intent.putExtra("instructorPhone", current.course.getInstructorPhone());
+                    intent.putExtra("instructorEmail", current.course.getInstructorEmail());
                     intent.putExtra("note", current.course.getNote());
-                    intent.putExtra("instructor", current.course.getInstructor());
+//                    intent.putExtra("instructor", current.course.getInstructor());
                     intent.putExtra("status", current.course.getStatus());
                     viewContext.startActivity(intent);
                 }
@@ -117,10 +122,13 @@ public class AssociatedCourseAdapter extends RecyclerView.Adapter<AssociatedCour
                     Intent intent = new Intent(viewContext, CourseDetail.class);
                     intent.putExtra("id", String.valueOf(current.course.getId()));
                     intent.putExtra("title", current.course.getTitle());
-                    intent.putExtra("start", current.term.getStart().toString());
-                    intent.putExtra("end", current.term.getEnd().toString());
+                    intent.putExtra("start", current.course.getStart().toString());
+                    intent.putExtra("end", current.course.getEnd().toString());
                     intent.putExtra("note", current.course.getNote());
-                    intent.putExtra("instructor", current.course.getInstructor());
+//                    intent.putExtra("instructor", current.course.getInstructor());
+                    intent.putExtra("instructorName",current.course.getInstructorName());
+                    intent.putExtra("instructorPhone", current.course.getInstructorPhone());
+                    intent.putExtra("instructorEmail", current.course.getInstructorEmail());
                     intent.putExtra("status", current.course.getStatus());
                     viewContext.startActivity(intent);
                 }

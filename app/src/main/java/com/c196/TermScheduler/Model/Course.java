@@ -7,6 +7,8 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
+
 
 @Entity(tableName = "course_table",
         foreignKeys = {
@@ -27,9 +29,24 @@ public class Course {
     private int termId;
 
     @NonNull
-    @ColumnInfo(name = "instructor")
-    private String instructor;
+    @ColumnInfo(name = "instructor_name")
+    private String instructorName;
 
+    @NonNull
+    @ColumnInfo(name = "instructor_phone")
+    private String instructorPhone;
+
+    @NonNull
+    @ColumnInfo(name = "instructor_email")
+    private String instructorEmail;
+
+    @NonNull
+    @ColumnInfo(name="start")
+    private Date start;
+
+    @NonNull
+    @ColumnInfo(name="end")
+    private Date end;
 
     @ColumnInfo(name = "note", defaultValue = "none")
     private String note;
@@ -42,12 +59,18 @@ public class Course {
     @ColumnInfo(name = "status")
     private String status;
 
-    public Course(@NonNull String instructor, String note, @NonNull String title, @NonNull String status, int termId) {
-        this.instructor = instructor;
+
+
+    public Course(@NonNull String instructorName, String instructorPhone, String instructorEmail, Date start, Date end, String note, @NonNull String title, @NonNull String status, int termId) {
+        this.instructorName = instructorName;
+        this.instructorPhone = instructorPhone;
+        this.instructorEmail = instructorEmail;
         this.note = note;
         this.title = title;
         this.status = status;
         this.termId = termId;
+        this.start = start;
+        this.end = end;
     }
 
     public int getId() {
@@ -67,12 +90,30 @@ public class Course {
     }
 
     @NonNull
-    public String getInstructor() {
-        return instructor;
+    public String getInstructorName() {
+        return instructorName;
     }
 
-    public void setInstructor(@NonNull String instructor) {
-        this.instructor = instructor;
+    public void setInstructorName(@NonNull String instructorName) {
+        this.instructorName = instructorName;
+    }
+
+    @NonNull
+    public String getInstructorPhone() {
+        return instructorPhone;
+    }
+
+    public void setInstructorPhone(@NonNull String instructorPhone) {
+        this.instructorPhone = instructorPhone;
+    }
+
+    @NonNull
+    public String getInstructorEmail() {
+        return instructorEmail;
+    }
+
+    public void setInstructorEmail(@NonNull String instructorEmail) {
+        this.instructorEmail = instructorEmail;
     }
 
     public String getNote() {
@@ -99,5 +140,21 @@ public class Course {
 
     public void setStatus(@NonNull String status) {
         this.status = status;
+    }
+
+    public Date getStart() {
+        return start;
+    }
+
+    public void setStart(Date start) {
+        this.start = start;
+    }
+
+    public Date getEnd() {
+        return end;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
     }
 }
