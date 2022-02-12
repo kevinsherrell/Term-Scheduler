@@ -103,7 +103,9 @@ public class AssociatedAssessmentAdapter extends RecyclerView.Adapter<Associated
                     intent.putExtra("date", current.assessment.getDate().toString());
                     intent.putExtra("courseTitle", current.course.getTitle());
                     intent.putExtra("courseId", current.course.getId());
-                    intent.putExtra("courseInstructor", current.course.getInstructor());
+                    intent.putExtra("instructorName", current.course.getInstructorName());
+                    intent.putExtra("instructorPhone", current.course.getInstructorPhone());
+                    intent.putExtra("instructorEmail", current.course.getInstructorEmail());
                     intent.putExtra("courseNote", current.course.getNote());
                     intent.putExtra("courseStatus", current.course.getStatus());
                     viewContext.startActivity(intent);
@@ -124,7 +126,9 @@ public class AssociatedAssessmentAdapter extends RecyclerView.Adapter<Associated
                     intent.putExtra("courseId", String.valueOf(current.course.getId()));
                     intent.putExtra("courseTitle", current.course.getTitle());
                     intent.putExtra("courseId", String.valueOf(current.course.getId()));
-                    intent.putExtra("courseInstructor", current.course.getInstructor());
+                    intent.putExtra("instructorName", current.course.getInstructorName());
+                    intent.putExtra("instructorPhone", current.course.getInstructorPhone());
+                    intent.putExtra("instructorEmail", current.course.getInstructorEmail());
                     intent.putExtra("courseNote", current.course.getNote());
                     intent.putExtra("courseStatus", current.course.getStatus());
                     viewContext.startActivity(intent);
