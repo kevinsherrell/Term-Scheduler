@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.c196.TermScheduler.Model.Course;
 import com.c196.TermScheduler.Model.CourseViewModel;
 import com.c196.TermScheduler.R;
+import com.c196.TermScheduler.UI.Course.CourseDetail;
 import com.c196.TermScheduler.Utils.Converters;
 
 import java.time.LocalDate;
@@ -94,7 +95,7 @@ public class CourseModify extends AppCompatActivity {
 
             if (modifyCourse()) {
                 model.update(course);
-                backToTermDetail();
+                backToTermList();
             } else {
                 showMessage("Please check your fields and try again");
             }
@@ -233,24 +234,24 @@ public class CourseModify extends AppCompatActivity {
 //
 //    }
 
-    public void backToTermDetail() {
-        Intent intent = new Intent(CourseModify.this, TermDetail.class);
+    public void backToTermList() {
+        Intent intent = new Intent(CourseModify.this, TermList.class);
         intent.putExtra("id", termId);
         intent.putExtra("title", termTitle);
         intent.putExtra("start", courseStart);
         intent.putExtra("end", courseEnd);
         startActivity(intent);
     }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                this.finish();
+//                return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     public boolean modifyCourse() {
         String iName = instructorName.getText().toString();
@@ -348,5 +349,12 @@ public class CourseModify extends AppCompatActivity {
 
     public void showMessage(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        backToTermList();
+        return true;
     }
 }

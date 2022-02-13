@@ -23,8 +23,8 @@ public class CourseViewModel extends AndroidViewModel {
     }
 
 
-    public LiveData<List<CourseWithTerm>> getCoursesWithTerm(int id) {
-        return repository.getCoursesWithTerm( id);
+    public LiveData<List<CourseWithTerm>> getCoursesWithTerm() {
+        return repository.getCoursesWithTerm();
     }
 
     public LiveData<List<Course>> getAllCourses() {

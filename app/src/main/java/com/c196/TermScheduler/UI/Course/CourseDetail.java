@@ -30,7 +30,9 @@ import com.c196.TermScheduler.UI.Assessment.AssessmentAdd;
 import com.c196.TermScheduler.UI.Assessment.AssessmentDetail;
 import com.c196.TermScheduler.UI.Term.AssociatedCourseAdapter;
 import com.c196.TermScheduler.UI.Term.CourseAdd;
+import com.c196.TermScheduler.UI.Term.TermAdd;
 import com.c196.TermScheduler.UI.Term.TermDetail;
+import com.c196.TermScheduler.UI.Term.TermList;
 import com.c196.TermScheduler.Utils.TermReceiver;
 
 import java.sql.Date;
@@ -66,7 +68,7 @@ public class CourseDetail extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         model = new ViewModelProvider.AndroidViewModelFactory(CourseDetail.this.getApplication()).create(AssessmentViewModel.class);
 
-        model.getAssessmentsWithCourse(Integer.parseInt(id)).observe(this, Assessments -> {
+        model.getAssessmentsWithCourse().observe(this, Assessments -> {
             adapter = new AssociatedAssessmentAdapter((Assessments));
             recyclerView.setAdapter(adapter);
         });
@@ -104,23 +106,30 @@ public class CourseDetail extends AppCompatActivity {
             intent.putExtra("title", title);
             intent.putExtra("start", start);
             intent.putExtra("end", end);
+            intent.putExtra("instructorName", instructorName);
+            intent.putExtra("instructorPhone", instructorPhone);
+            intent.putExtra("instructorEmail", instructorEmail);
+            intent.putExtra("note", note);
+            intent.putExtra("status", status);
             startActivity(intent);
 
         });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                this.finish();
+//                return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     private void getIncomingIntent() {
-        Log.d(TAG, "getIncomingIntent");
+        Bundle courseDetailBundle = getIntent().getExtras();
+
+        Log.d(TAG, "getIncomingIntent " + courseDetailBundle.getString("id"));
         if (getIntent().hasExtra("id")) {
             Log.d(TAG, "getIncomingIntent: has ID " + getIntent().getStringExtra("id"));
             TextView idView = findViewById(R.id.cDetailID);
@@ -153,7 +162,7 @@ public class CourseDetail extends AppCompatActivity {
     }
 
     public static void showToast(Context context, final String message) {
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
     private void createNotificationChannel() {
@@ -168,5 +177,20 @@ public class CourseDetail extends AppCompatActivity {
             notificationManager.createNotificationChannel(channel);
         }
 
+    }
+    public void backToTermDetail() {
+        Bundle bundle = getIntent().getExtras();
+        Intent intent = new Intent(CourseDetail.this, TermList.class);
+        intent.putExtra("id", bundle.getString("termId"));
+        intent.putExtra("title", bundle.getString("termTitle"));
+        intent.putExtra("start", bundle.getString("termStart"));
+        intent.putExtra("end", bundle.getString("termEnd"));
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        backToTermDetail();
+        return true;
     }
 }

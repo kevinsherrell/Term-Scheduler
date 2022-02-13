@@ -145,4 +145,9 @@ public class TermAdd extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        backToTermList();
+        return true;
+    }
 }

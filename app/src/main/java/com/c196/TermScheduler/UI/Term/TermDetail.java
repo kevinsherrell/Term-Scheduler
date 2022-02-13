@@ -43,11 +43,15 @@ public class TermDetail extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         model = new ViewModelProvider.AndroidViewModelFactory(TermDetail.this.getApplication()).create(CourseViewModel.class);
 
-        model.getCoursesWithTerm(Integer.parseInt(id)).observe(this, courses -> {
+//        model.getCoursesWithTerm(Integer.parseInt(id)).observe(this, courses -> {
+//            adapter = new AssociatedCourseAdapter((courses));
+//            recyclerView.setAdapter(adapter);
+//        });
+
+        model.getCoursesWithTerm().observe(this, courses -> {
             adapter = new AssociatedCourseAdapter((courses));
             recyclerView.setAdapter(adapter);
         });
-
 
         Button addCourse = findViewById(R.id.addCourse);
         addCourse.setOnClickListener(view -> {
@@ -81,14 +85,22 @@ public class TermDetail extends AppCompatActivity {
 
         }
     }
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                this.finish();
+//                return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
+    public void backToTermList() {
+        Intent intent = new Intent(TermDetail.this, TermList.class);
+        startActivity(intent);
     }
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        backToTermList();
+        return true;
+    }
 }

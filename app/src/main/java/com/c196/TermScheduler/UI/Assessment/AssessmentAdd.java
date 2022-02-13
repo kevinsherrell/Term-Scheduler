@@ -30,6 +30,7 @@ import com.c196.TermScheduler.Model.AssessmentViewModel;
 import com.c196.TermScheduler.R;
 import com.c196.TermScheduler.UI.Course.CourseDetail;
 import com.c196.TermScheduler.UI.Term.TermAdd;
+import com.c196.TermScheduler.UI.Term.TermList;
 import com.c196.TermScheduler.Utils.TermReceiver;
 
 import java.time.LocalDate;
@@ -45,6 +46,12 @@ public class AssessmentAdd extends AppCompatActivity {
     private String start;
     private String end;
     private String note;
+    private String status;
+    private String instructorName;
+    private String instructorPhone;
+    private String instructorEmail;
+
+
 
     public EditText titleInput;
     public Spinner typeBox;
@@ -146,6 +153,10 @@ public class AssessmentAdd extends AppCompatActivity {
             start = getIntent().getStringExtra("start");
             end = getIntent().getStringExtra("end");
             note = getIntent().getStringExtra("note");
+            status = getIntent().getStringExtra("status");
+            instructorName = getIntent().getStringExtra("instructorName");
+            instructorPhone = getIntent().getStringExtra("instructorPhone");
+            instructorEmail = getIntent().getStringExtra("instructorEmail");
 
             titleInput = findViewById(R.id.assessmentModTitleInput);
             typeBox = findViewById(R.id.assessmentModTypeBox);
@@ -170,36 +181,22 @@ public class AssessmentAdd extends AppCompatActivity {
     }
 
     public void backToCourseDetail() {
-        Intent intent = new Intent(AssessmentAdd.this, CourseDetail.class);
+        Intent intent = new Intent(AssessmentAdd.this, TermList.class);
         intent.putExtra("id", courseId);
         intent.putExtra("title", title);
         intent.putExtra("start", start);
         intent.putExtra("end", end);
         intent.putExtra("note", note);
+        intent.putExtra("status", status);
+        intent.putExtra("instructorName", instructorName);
+        intent.putExtra("instructorPhone", instructorPhone);
+        intent.putExtra("instructorEmail", instructorEmail);
         startActivity(intent);
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+    public boolean onSupportNavigateUp() {
+        backToCourseDetail();
+        return true;
     }
-
-//    private void createNotificationChannel() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            CharSequence name = "termReminderChannel";
-//            String description = "Channel for term reminders";
-//            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-//            NotificationChannel channel = new NotificationChannel("termNotify", name, importance);
-//            channel.setDescription(description);
-//
-//            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-//            notificationManager.createNotificationChannel(channel);
-//        }
-//
-//    }
 }

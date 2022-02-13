@@ -9,8 +9,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/termRecyclerview"
-        android:layout_width="293dp"
-        android:layout_height="539dp"
+        android:layout_width="389dp"
+        android:layout_height="667dp"
         android:text="Hello World!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

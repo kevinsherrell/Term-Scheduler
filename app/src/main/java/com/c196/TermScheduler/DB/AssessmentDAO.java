@@ -44,8 +44,10 @@ public interface AssessmentDAO {
     List<Assessment> getAssessmentsByFK(int id);
 
     // get assessments with associated term information
-    @Query("SELECT * FROM assessment_table WHERE course_id = :id")
-    LiveData<List<AssessmentWithCourse>> getAssessmentsWithTerm(int id);
+//    @Query("SELECT * FROM assessment_table WHERE course_id = :id")
+//    LiveData<List<AssessmentWithCourse>> getAssessmentsWithTerm(int id);
+    @Query("SELECT * FROM assessment_table")
+    LiveData<List<AssessmentWithCourse>> getAssessmentsWithTerm();
 
 
     @Query("SELECT * FROM assessment_table WHERE assessment_table.assessment_id == :id")

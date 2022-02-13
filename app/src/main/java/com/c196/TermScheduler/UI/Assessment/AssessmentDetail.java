@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.c196.TermScheduler.R;
 import com.c196.TermScheduler.UI.Course.CourseDetail;
+import com.c196.TermScheduler.UI.Term.TermDetail;
 import com.c196.TermScheduler.UI.Term.TermList;
 import com.c196.TermScheduler.Utils.TermReceiver;
 
@@ -76,16 +77,16 @@ public class AssessmentDetail extends AppCompatActivity {
         adCourseInstructor.setText(getString(R.string.adCourseInstructorString) +courseInstructor);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                goHome();
-                this.finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                goHome();
+//                this.finish();
+//                return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     public void onBackPressed() {
@@ -112,5 +113,26 @@ public class AssessmentDetail extends AppCompatActivity {
             notificationManager.createNotificationChannel(channel);
         }
 
+    }
+    public void backToTermDetail() {
+        Bundle bundle = getIntent().getExtras();
+        Intent intent = new Intent(AssessmentDetail.this, TermList.class);
+        intent.putExtra("id", bundle.getString("courseId"));
+        intent.putExtra("title", bundle.getString("courseTitle"));
+        intent.putExtra("start", bundle.getString("courseStart"));
+        intent.putExtra("end", bundle.getString("courseEnd"));
+        intent.putExtra("note", bundle.getString("courseNote"));
+        intent.putExtra("status", bundle.getString("courseStatus"));
+        intent.putExtra("instructorName", bundle.getString("instructorName"));
+        intent.putExtra("instructorPhone", bundle.getString("instructorPhone"));
+        intent.putExtra("instructorEmail", bundle.getString("instructorEmail"));
+
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        backToTermDetail();
+        return true;
     }
 }

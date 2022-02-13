@@ -46,11 +46,16 @@ public class SchedulerRepository {
         return allCourses;
     }
 
-    public LiveData<List<CourseWithTerm>> getCoursesWithTerm(int id) {
-        return courseDAO.getCoursesWithTerm( id);
+//    public LiveData<List<CourseWithTerm>> getCoursesWithTerm(int id) {
+//        return courseDAO.getCoursesWithTerm( id);
+//    }
+
+    public LiveData<List<CourseWithTerm>> getCoursesWithTerm() {
+        return courseDAO.getCoursesWithTerm( );
     }
-    public LiveData<List<AssessmentWithCourse>> getAssessmentsWithTerm(int id){
-        return assessmentDAO.getAssessmentsWithTerm(id);
+
+    public LiveData<List<AssessmentWithCourse>> getAssessmentsWithTerm(){
+        return assessmentDAO.getAssessmentsWithTerm();
     }
  public Course getOneCourseByFK(int id){
         return courseDAO.getOneCourseByFK(id);

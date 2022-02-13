@@ -103,6 +103,8 @@ public class AssociatedAssessmentAdapter extends RecyclerView.Adapter<Associated
                     intent.putExtra("date", current.assessment.getDate().toString());
                     intent.putExtra("courseTitle", current.course.getTitle());
                     intent.putExtra("courseId", current.course.getId());
+                    intent.putExtra("courseStart", current.course.getStart().toString());
+                    intent.putExtra("courseEnd", current.course.getEnd().toString());
                     intent.putExtra("instructorName", current.course.getInstructorName());
                     intent.putExtra("instructorPhone", current.course.getInstructorPhone());
                     intent.putExtra("instructorEmail", current.course.getInstructorEmail());

@@ -1,14 +1,11 @@
 package com.c196.TermScheduler.UI.Term;
 
-import android.app.AlarmManager;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,18 +17,12 @@ import com.c196.TermScheduler.Data.SchedulerRepository;
 import com.c196.TermScheduler.Model.Term;
 import com.c196.TermScheduler.Model.TermViewModel;
 import com.c196.TermScheduler.R;
-import com.c196.TermScheduler.Utils.TermReceiver;
+import com.c196.TermScheduler.UI.Assessment.AssessmentList;
+import com.c196.TermScheduler.UI.Course.CourseList;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 public class TermList extends AppCompatActivity {
     private String TAG = "MainActivity";
@@ -48,7 +39,8 @@ public class TermList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setTitle("Term List (Home)");
         recyclerView = findViewById(R.id.termRecyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -84,8 +76,31 @@ public class TermList extends AppCompatActivity {
     public static void showToast(Context context, final String message) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_term_list, menu);
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case R.id.cList:
+                toClist();
+                this.finish();
+                return true;
+            case R.id.aList:
+                toAlist();
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
-
-
-
+public void toClist(){
+        Intent intent = new Intent(TermList.this, CourseList.class);
+        startActivity(intent);
+}
+    public void toAlist() {
+        Intent intent = new Intent(TermList.this, AssessmentList.class);
+        startActivity(intent);
+    }
 }

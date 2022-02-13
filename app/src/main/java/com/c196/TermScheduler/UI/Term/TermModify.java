@@ -137,10 +137,7 @@ public class TermModify extends AppCompatActivity {
         model.update(term);
     }
 
-    public void backToTermList() {
-        Intent intent = new Intent(TermModify.this, TermList.class);
-        startActivity(intent);
-    }
+
 
     public void getIncomingIntent() {
         if (getIntent() != null) {
@@ -161,15 +158,15 @@ public class TermModify extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                this.finish();
+//                return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     public void formatDate(int year, int month, int day) {
         month = month + 1;
@@ -197,5 +194,16 @@ public class TermModify extends AppCompatActivity {
         termModifyDateText.setText(startDate.toString());
         termModifyDateEnd.setText(endDate.toString());
 //        Log.d(TAG, "onDateSet: " + date);
+    }
+
+    public void backToTermList() {
+        Intent intent = new Intent(TermModify.this, TermList.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        backToTermList();
+        return true;
     }
 }

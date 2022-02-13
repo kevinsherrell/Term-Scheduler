@@ -24,6 +24,7 @@ import com.c196.TermScheduler.Model.Assessment;
 import com.c196.TermScheduler.Model.AssessmentViewModel;
 import com.c196.TermScheduler.R;
 import com.c196.TermScheduler.UI.Course.CourseDetail;
+import com.c196.TermScheduler.UI.Term.TermAdd;
 import com.c196.TermScheduler.UI.Term.TermList;
 
 import java.sql.Array;
@@ -43,7 +44,10 @@ public class AssessmentModify extends AppCompatActivity {
     private String courseStart;
     private String courseEnd;
     private String courseNote;
-
+    private String instructorName;
+    private String instructorPhone;
+    private String instructorEmail;
+    private String status;
     public String id;
     public String title;
     public String description;
@@ -161,6 +165,10 @@ public class AssessmentModify extends AppCompatActivity {
             courseStart = getIntent().getStringExtra("courseStart");
             courseEnd = getIntent().getStringExtra("courseEnd");
             courseNote = getIntent().getStringExtra("courseNote");
+            status = getIntent().getStringExtra("courseStatus");
+            instructorName = getIntent().getStringExtra("instructorName");
+            instructorPhone = getIntent().getStringExtra("instructorPhone");
+            instructorEmail = getIntent().getStringExtra("instructorEmail");
             // assessment information
             id = getIntent().getStringExtra("id");
             title = getIntent().getStringExtra("title");
@@ -215,15 +223,15 @@ public class AssessmentModify extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                this.finish();
+//                return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     public void formatDate(int year, int month, int day) {
         month = month + 1;
@@ -250,5 +258,25 @@ public class AssessmentModify extends AppCompatActivity {
         dateText.setText(date.toString());
 
         Log.d(TAG, "onDateSet: " + date);
+    }
+    public void backToCourseDetail() {
+        Intent intent = new Intent(AssessmentModify.this, TermList.class);
+        intent.putExtra("id", courseId);
+        intent.putExtra("title", courseTitle);
+        intent.putExtra("start", courseStart);
+        intent.putExtra("end", courseEnd);
+        intent.putExtra("id", courseId);
+        intent.putExtra("title", courseTitle);
+        intent.putExtra("status", status);
+        intent.putExtra("instructorName", instructorName);
+        intent.putExtra("instructorPhone", instructorPhone);
+        intent.putExtra("instructorEmail", instructorEmail);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        backToCourseDetail();
+        return true;
     }
 }

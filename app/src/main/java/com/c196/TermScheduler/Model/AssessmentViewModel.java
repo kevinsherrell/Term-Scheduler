@@ -21,10 +21,12 @@ public class AssessmentViewModel extends AndroidViewModel {
     }
 
 
-    public LiveData<List<AssessmentWithCourse>> getAssessmentsWithCourse(int id) {
-        return repository.getAssessmentsWithTerm(id);
-    }
-
+//    public LiveData<List<AssessmentWithCourse>> getAssessmentsWithCourse(int id) {
+//        return repository.getAssessmentsWithTerm(id);
+//    }
+public LiveData<List<AssessmentWithCourse>> getAssessmentsWithCourse() {
+    return repository.getAssessmentsWithTerm();
+}
     public LiveData<List<Assessment>> getAllAssessments() {
         return allAssessments;
     }

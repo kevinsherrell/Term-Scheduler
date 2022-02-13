@@ -130,6 +130,11 @@ public class AssociatedCourseAdapter extends RecyclerView.Adapter<AssociatedCour
                     intent.putExtra("instructorPhone", current.course.getInstructorPhone());
                     intent.putExtra("instructorEmail", current.course.getInstructorEmail());
                     intent.putExtra("status", current.course.getStatus());
+
+                    intent.putExtra("termId", String.valueOf(current.term.getId()));
+                    intent.putExtra("termStart", current.term.getStart().toString());
+                    intent.putExtra("termEnd", current.term.getEnd().toString());
+                    intent.putExtra("termTitle", current.term.getTitle());
                     viewContext.startActivity(intent);
                 }
             });
