@@ -3,10 +3,15 @@ package com.c196.TermScheduler.UI.Term;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -19,6 +24,7 @@ import android.widget.Toast;
 import com.c196.TermScheduler.Model.Term;
 import com.c196.TermScheduler.Model.TermViewModel;
 import com.c196.TermScheduler.R;
+import com.c196.TermScheduler.Utils.TermReceiver;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
 import java.time.Instant;
@@ -34,7 +40,7 @@ public class TermAdd extends AppCompatActivity {
     // id termAddTitleInput
     public EditText termAddTitleInput;
     // id termAddStartButton and termAddSubmit
-    public Button termAddStartButton,  termAddEndButton, termAddSubmit;
+    public Button termAddStartButton, termAddEndButton, termAddSubmit;
     // id termAddDateText
     public TextView termAddDateText, termAddDateEnd;
 
@@ -49,6 +55,11 @@ public class TermAdd extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_add);
+        createNotificationChannel();
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent intent = new Intent(TermAdd.this, TermReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(TermAdd.this, 0, intent, 0);
+
 
         termAddStartButton = findViewById(R.id.termAddStartButton);
 
@@ -56,6 +67,8 @@ public class TermAdd extends AppCompatActivity {
         termAddTitleInput = findViewById(R.id.termAddTitleInput);
         termAddDateText = findViewById(R.id.termAddDateText);
         termAddDateEnd = findViewById(R.id.termAddDateEnd);
+
+
         termAddStartButton.setOnClickListener(view -> {
             Log.d(TAG, "onCreate: onClickDate");
             Calendar cal = Calendar.getInstance();
@@ -108,7 +121,7 @@ public class TermAdd extends AppCompatActivity {
 
         termAddSubmit.setOnClickListener(view -> {
             Log.d(TAG, "onCreate: onClickSubmit");
-            insertTerm();
+            insertTerm(alarmManager, pendingIntent);
             backToTermList();
             Toast.makeText(getApplicationContext(), "Term Saved Successfully", Toast.LENGTH_LONG).show();
 
@@ -116,13 +129,15 @@ public class TermAdd extends AppCompatActivity {
 
     }
 
-    public void insertTerm() {
+    public void insertTerm(AlarmManager alarmManager, PendingIntent pendingIntent) {
         model = new ViewModelProvider.AndroidViewModelFactory(TermAdd.this.getApplication()).create(TermViewModel.class);
         String title = termAddTitleInput.getText().toString();
 //        Date date = Date.from(Instant.parse(termAddDateText.toString()));
         Date endDate = Date.from(lDate.atStartOfDay(ZoneId.systemDefault()).plusMonths(6).toInstant());
         Term term = new Term(title, startDate, endDate);
+        Log.d(TAG, "insertTerm: new term start" + term.getStart().getTime());
         model.insert(term);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, term.getStart().getTime(), pendingIntent);
     }
 
     public void backToTermList() {
@@ -130,7 +145,20 @@ public class TermAdd extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void showDatePicker(){
+    public void showDatePicker() {
+
+    }
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "termReminderChannel";
+            String description = "Channel for term reminders";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("termNotify", name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
 
     }
 }
